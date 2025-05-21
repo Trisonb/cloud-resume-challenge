@@ -1,7 +1,8 @@
 # Terraform files
 .terraform/
-terraform.tfstate
-terraform.tfstate.*
+# Temporarily commented out to include state files for CI/CD testing - revert after workflow runs
+# terraform.tfstate
+# terraform.tfstate.*
 .terraform.lock.hcl
 
 # Generated files
