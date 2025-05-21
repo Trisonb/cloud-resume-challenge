@@ -1,0 +1,11 @@
+# Terraform files
+.terraform/
+terraform.tfstate
+terraform.tfstate.*
+.terraform.lock.hcl
+
+# Generated files
+function.zip
+
+# Temporary files
+update-dns.json
