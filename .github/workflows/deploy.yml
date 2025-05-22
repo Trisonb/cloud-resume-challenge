@@ -39,4 +39,4 @@ jobs:
 
     - name: Create CloudFront Invalidation
       run: |
-        aws cloudfront create-invalidation --distribution-id E1ICZLYV1HBZAB --paths "/*"
+        aws cloudfront create-invalidation --distribution-id E3V232V07RULP0 --paths "/*"
