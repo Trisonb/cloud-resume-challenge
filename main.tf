@@ -1,3 +1,5 @@
+data "aws_caller_identity" "current" {}
+
 provider "aws" {
   region  = "us-east-1"
 }
@@ -238,7 +240,6 @@ resource "random_string" "bucket_suffix" {
 # S3 Bucket Website Configuration
 resource "aws_s3_bucket_website_configuration" "website_config" {
   bucket = aws_s3_bucket.website_bucket.id
-
   index_document {
     suffix = "cloudresume.html"
   }
@@ -262,44 +263,53 @@ resource "aws_cloudfront_origin_access_identity" "website_oai" {
 # S3 Bucket Policy for CloudFront OAI
 resource "aws_s3_bucket_policy" "website_policy" {
   bucket = aws_s3_bucket.website_bucket.id
-
   policy = jsonencode({
-    Version = "2012-10-17"
+    Version = "2008-10-17"
+    Id      = "PolicyForCloudFrontPrivateContent"
     Statement = [
       {
-        Sid       = "AllowCloudFrontAccess"
+        Sid       = "AllowCloudFrontServicePrincipal"
         Effect    = "Allow"
         Principal = {
-          AWS = aws_cloudfront_origin_access_identity.website_oai.iam_arn
+          Service = "cloudfront.amazonaws.com"
+        }
+        Action    = "s3:GetObject"
+        Resource  = "${aws_s3_bucket.website_bucket.arn}/*"
+        Condition = {
+          StringEquals = {
+            "AWS:SourceArn" = "arn:aws:cloudfront::${data.aws_caller_identity.current.account_id}:distribution/E3V232V07RULP0"
+          }
+        }
+      },
+      {
+        Effect    = "Allow"
+        Principal = {
+          AWS = "arn:aws:iam::940482418939:root"
         }
         Action    = "s3:GetObject"
         Resource  = "${aws_s3_bucket.website_bucket.arn}/*"
       }
     ]
   })
-
-  depends_on = [aws_s3_bucket_public_access_block.website_public_access]
 }
 
 # CloudFront Distribution
 resource "aws_cloudfront_distribution" "website_cdn" {
-  enabled             = true
-  is_ipv6_enabled     = true
-  default_root_object = "cloudresume.html"
-
   origin {
-    domain_name = aws_s3_bucket.website_bucket.bucket_regional_domain_name
-    origin_id   = "S3-${aws_s3_bucket.website_bucket.id}"
-
-    s3_origin_config {
-      origin_access_identity = aws_cloudfront_origin_access_identity.website_oai.cloudfront_access_identity_path
-    }
+    domain_name = "trison-cloud-resume-test-gnkn928i.s3.us-east-1.amazonaws.com"
+    origin_id   = "S3-trison-cloud-resume-test-gnkn928i"
+    origin_access_control_id = "E1PLEV6BOWGMG5"
   }
-
   default_cache_behavior {
-    allowed_methods  = ["GET", "HEAD"]
-    cached_methods   = ["GET", "HEAD"]
-    target_origin_id = "S3-${aws_s3_bucket.website_bucket.id}"
+    target_origin_id = "S3-trison-cloud-resume-test-gnkn928i"
+    allowed_methods        = ["GET", "HEAD"]
+    cached_methods         = ["GET", "HEAD"]
+    compress               = false
+    default_ttl            = 3600
+    max_ttl                = 86400
+    min_ttl                = 0
+    smooth_streaming       = false
+    viewer_protocol_policy = "redirect-to-https"
 
     forwarded_values {
       query_string = false
@@ -307,24 +317,20 @@ resource "aws_cloudfront_distribution" "website_cdn" {
         forward = "none"
       }
     }
-
-    viewer_protocol_policy = "redirect-to-https"
-    min_ttl                = 0
-    default_ttl            = 3600
-    max_ttl                = 86400
   }
-
+  default_root_object = "cloudresume.html"
+  enabled             = true
+  is_ipv6_enabled     = true
+  price_class         = "PriceClass_All"
+  aliases             = ["test.trisoncloudresume.com"]
   restrictions {
     geo_restriction {
       restriction_type = "none"
     }
   }
-
-aliases = ["test.trisoncloudresume.com"]
-
   viewer_certificate {
-  acm_certificate_arn      = "arn:aws:acm:us-east-1:442426863782:certificate/767456a5-a4b8-4f6c-8d59-baa6e2c891d2"
-  ssl_support_method       = "sni-only"
-  minimum_protocol_version = "TLSv1.2_2021"
-}
+    acm_certificate_arn      = "arn:aws:acm:us-east-1:442426863782:certificate/767456a5-a4b8-4f6c-8d59-baa6e2c891d2"
+    ssl_support_method       = "sni-only"
+    minimum_protocol_version = "TLSv1.2_2021"
+  }
 }
