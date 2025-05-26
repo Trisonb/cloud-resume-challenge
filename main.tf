@@ -51,7 +51,6 @@ resource "aws_iam_role" "lambda_role" {
 resource "aws_iam_policy" "lambda_policy" {
   name        = "lambda-visitor-count-policy"
   description = "Policy for Lambda to access DynamoDB and CloudWatch Logs"
-
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
@@ -59,7 +58,8 @@ resource "aws_iam_policy" "lambda_policy" {
         Effect = "Allow"
         Action = [
           "dynamodb:GetItem",
-          "dynamodb:PutItem"
+          "dynamodb:PutItem",
+          "dynamodb:UpdateItem"
         ]
         Resource = aws_dynamodb_table.visitor_count_table.arn
       },
@@ -70,10 +70,49 @@ resource "aws_iam_policy" "lambda_policy" {
           "logs:CreateLogStream",
           "logs:PutLogEvents"
         ]
-        Resource = "*"
+        Resource = "arn:aws:logs:us-east-1:${data.aws_caller_identity.current.account_id}:log-group:/aws/lambda/visitor-count-function:*"
       }
     ]
   })
+}
+
+# IAM Role for API Gateway
+resource "aws_iam_role" "api_gateway_role" {
+  name = "api-gateway-visitor-count-role"
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Principal = {
+          Service = "apigateway.amazonaws.com"
+        }
+        Action = "sts:AssumeRole"
+      }
+    ]
+  })
+}
+
+# IAM Policy for API Gateway to invoke Lambda
+resource "aws_iam_policy" "api_gateway_policy" {
+  name        = "api-gateway-invoke-lambda-policy"
+  description = "Policy for API Gateway to invoke Lambda"
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = "lambda:InvokeFunction"
+        Resource = aws_lambda_function.visitor_count_function.arn
+      }
+    ]
+  })
+}
+
+# Attach policy to API Gateway role
+resource "aws_iam_role_policy_attachment" "api_gateway_policy_attachment" {
+  role       = aws_iam_role.api_gateway_role.name
+  policy_arn = aws_iam_policy.api_gateway_policy.arn
 }
 
 # Attach the policy to the Lambda role
@@ -138,6 +177,7 @@ resource "aws_api_gateway_integration" "lambda_integration" {
   integration_http_method = "POST"
   type                    = "AWS_PROXY"
   uri                     = aws_lambda_function.visitor_count_function.invoke_arn
+  credentials             = aws_iam_role.api_gateway_role.arn
 }
 
 # OPTIONS Method for CORS
