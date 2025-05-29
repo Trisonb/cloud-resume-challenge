@@ -8,6 +8,7 @@ on:
       - 'cloudresume.html'
       - 'cloudresume.js'
       - 'cloudresume.css'
+      - '.github/workflows/deploy.yml'
 jobs:
   deploy:
     runs-on: ubuntu-latest
