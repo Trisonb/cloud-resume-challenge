@@ -5,14 +5,12 @@ data "aws_caller_identity" "current" {}
 # Provider for Production Account
 provider "aws" {
   region  = "us-east-1"
-  profile = "prod-account"
 }
 
 # Provider for Test Account
 provider "aws" {
   alias   = "test"
   region  = "us-east-1"
-  profile = "test-account"
 }
 
 terraform {
@@ -20,7 +18,6 @@ terraform {
     bucket  = "trison-terraform-state-1747864476"
     key     = "terraform.tfstate"
     region  = "us-east-1"
-    profile = "prod-account"
   }
 }
 
