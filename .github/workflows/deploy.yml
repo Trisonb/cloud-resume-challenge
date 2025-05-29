@@ -21,6 +21,13 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
         aws-region: us-east-1
+    - name: Configure AWS Credentials for Test Account
+      uses: aws-actions/configure-aws-credentials@v2
+      with:
+        aws-access-key-id: ${{ secrets.TEST_AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.TEST_AWS_SECRET_ACCESS_KEY }}
+        aws-session-token: ${{ secrets.TEST_AWS_SESSION_TOKEN }}
+        aws-region: us-east-1
     - name: Install Terraform
       uses: hashicorp/setup-terraform@v3
       with:
@@ -31,6 +38,9 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
         AWS_REGION: us-east-1
+        TF_VAR_test_aws_access_key_id: ${{ secrets.TEST_AWS_ACCESS_KEY_ID }}
+        TF_VAR_test_aws_secret_access_key: ${{ secrets.TEST_AWS_SECRET_ACCESS_KEY }}
+        TF_VAR_test_aws_session_token: ${{ secrets.TEST_AWS_SESSION_TOKEN }}
       run: terraform init -reconfigure
     - name: Terraform Apply
       env:
@@ -38,6 +48,9 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
         AWS_REGION: us-east-1
+        TF_VAR_test_aws_access_key_id: ${{ secrets.TEST_AWS_ACCESS_KEY_ID }}
+        TF_VAR_test_aws_secret_access_key: ${{ secrets.TEST_AWS_SECRET_ACCESS_KEY }}
+        TF_VAR_test_aws_session_token: ${{ secrets.TEST_AWS_SESSION_TOKEN }}
       run: terraform apply -auto-approve
     - name: Upload static files to S3
       run: |
