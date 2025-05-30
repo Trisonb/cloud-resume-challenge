@@ -15,6 +15,15 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
+    - name: Debug Secrets
+      run: |
+        echo "TEST_AWS_ACCESS_KEY_ID is set: ${TEST_AWS_ACCESS_KEY_ID:+set}"
+        echo "TEST_AWS_SECRET_ACCESS_KEY is set: ${TEST_AWS_SECRET_ACCESS_KEY:+set}"
+        echo "TEST_AWS_SESSION_TOKEN is set: ${TEST_AWS_SESSION_TOKEN:+set}"
+      env:
+        TEST_AWS_ACCESS_KEY_ID: ${{ secrets.TEST_AWS_ACCESS_KEY_ID }}
+        TEST_AWS_SECRET_ACCESS_KEY: ${{ secrets.TEST_AWS_SECRET_ACCESS_KEY }}
+        TEST_AWS_SESSION_TOKEN: ${{ secrets.TEST_AWS_SESSION_TOKEN }}
     - name: Configure AWS Credentials for Prod Account
       uses: aws-actions/configure-aws-credentials@v2
       with:
@@ -22,15 +31,6 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
         aws-region: us-east-1
-    - name: Debug Secrets
-  run: |
-    echo "TEST_AWS_ACCESS_KEY_ID is set: ${TEST_AWS_ACCESS_KEY_ID:+set}"
-    echo "TEST_AWS_SECRET_ACCESS_KEY is set: ${TEST_AWS_SECRET_ACCESS_KEY:+set}"
-    echo "TEST_AWS_SESSION_TOKEN is set: ${TEST_AWS_SESSION_TOKEN:+set}"
-  env:
-    TEST_AWS_ACCESS_KEY_ID: ${{ secrets.TEST_AWS_ACCESS_KEY_ID }}
-    TEST_AWS_SECRET_ACCESS_KEY: ${{ secrets.TEST_AWS_SECRET_ACCESS_KEY }}
-    TEST_AWS_SESSION_TOKEN: ${{ secrets.TEST_AWS_SESSION_TOKEN }}
     - name: Configure AWS Credentials for Test Account
       uses: aws-actions/configure-aws-credentials@v2
       with:
@@ -43,24 +43,8 @@ jobs:
       with:
         terraform_version: 1.9.0
     - name: Terraform Init
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
-        AWS_REGION: us-east-1
-        TF_VAR_test_aws_access_key_id: ${{ secrets.TEST_AWS_ACCESS_KEY_ID }}
-        TF_VAR_test_aws_secret_access_key: ${{ secrets.TEST_AWS_SECRET_ACCESS_KEY }}
-        TF_VAR_test_aws_session_token: ${{ secrets.TEST_AWS_SESSION_TOKEN }}
       run: terraform init -reconfigure
     - name: Terraform Apply
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
-        AWS_REGION: us-east-1
-        TF_VAR_test_aws_access_key_id: ${{ secrets.TEST_AWS_ACCESS_KEY_ID }}
-        TF_VAR_test_aws_secret_access_key: ${{ secrets.TEST_AWS_SECRET_ACCESS_KEY }}
-        TF_VAR_test_aws_session_token: ${{ secrets.TEST_AWS_SESSION_TOKEN }}
       run: terraform apply -auto-approve
     - name: Upload static files to S3
       run: |
