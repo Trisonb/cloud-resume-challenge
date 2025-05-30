@@ -142,3 +142,4 @@ resource "aws_iam_role" "lambda_role" {
 # Re-trigger workflow with new credentials
 # Re-trigger workflow to test prod secrets
 # Re-trigger workflow with fresh test credentials# Re-trigger workflow with fresh prod credentials
+# Re-trigger workflow with updated S3 permissions
