@@ -12,7 +12,7 @@
           "token.actions.githubusercontent.com:aud": "sts.amazonaws.com"
         },
         "StringLike": {
-          "token.actions.githubusercontent.com:sub": "repo:Trisonb/cloud-resume-challenge:*"
+          "token.actions.githubusercontent.com:sub": "repo:trisonb/cloud-resume-challenge:*"
         }
       }
     }
