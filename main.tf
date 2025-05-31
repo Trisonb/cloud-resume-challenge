@@ -1,4 +1,4 @@
-# Updated CI/CD test comment - May 28, 2025
+# Updated CI/CD test comment - May 31, 2025
 
 data "aws_caller_identity" "current" {}
 
@@ -109,6 +109,34 @@ resource "aws_cloudfront_distribution" "website_cdn_prod" {
   }
 }
 
+# DynamoDB Table for Visitor Count
+resource "aws_dynamodb_table" "visitor_count_table" {
+  provider       = aws.prod
+  name           = "visitor-count-table"
+  billing_mode   = "PAY_PER_REQUEST"
+  hash_key       = "user"
+  attribute {
+    name = "user"
+    type = "S"
+  }
+}
+
+# Lambda Function for Visitor Count
+resource "aws_lambda_function" "visitor_count_function" {
+  provider         = aws.prod
+  function_name    = "visitor-count-function"
+  handler          = "lambda_function.lambda_handler"
+  runtime          = "python3.9"
+  filename         = "function.zip"
+  source_code_hash = filebase64sha256("function.zip")
+  role             = aws_iam_role.lambda_role.arn
+  environment {
+    variables = {
+      TABLE_NAME = aws_dynamodb_table.visitor_count_table.name
+    }
+  }
+}
+
 # IAM Role for API Gateway
 resource "aws_iam_role" "api_gateway_role" {
   provider = aws.prod
@@ -143,4 +171,87 @@ resource "aws_iam_role" "lambda_role" {
       }
     ]
   })
+}
+
+# IAM Policy for Lambda to Access DynamoDB
+resource "aws_iam_role_policy" "lambda_dynamodb_policy" {
+  provider = aws.prod
+  name     = "lambda-dynamodb-policy"
+  role     = aws_iam_role.lambda_role.id
+  policy   = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "dynamodb:PutItem",
+          "dynamodb:GetItem",
+          "dynamodb:UpdateItem"
+        ]
+        Resource = aws_dynamodb_table.visitor_count_table.arn
+      },
+      {
+        Effect = "Allow"
+        Action = [
+          "logs:CreateLogGroup",
+          "logs:CreateLogStream",
+          "logs:PutLogEvents"
+        ]
+        Resource = "*"
+      }
+    ]
+  })
+}
+
+# API Gateway REST API
+resource "aws_api_gateway_rest_api" "visitor_count_api" {
+  provider = aws.prod
+  name     = "visitor-count-api"
+  description = "API for visitor count"
+}
+
+# API Gateway Resource
+resource "aws_api_gateway_resource" "visitor_resource" {
+  provider    = aws.prod
+  rest_api_id = aws_api_gateway_rest_api.visitor_count_api.id
+  parent_id   = aws_api_gateway_rest_api.visitor_count_api.root_resource_id
+  path_part   = "visitor"
+}
+
+# API Gateway Method (POST)
+resource "aws_api_gateway_method" "post_method" {
+  provider      = aws.prod
+  rest_api_id   = aws_api_gateway_rest_api.visitor_count_api.id
+  resource_id   = aws_api_gateway_resource.visitor_resource.id
+  http_method   = "POST"
+  authorization = "NONE"
+}
+
+# API Gateway Integration with Lambda
+resource "aws_api_gateway_integration" "lambda_integration" {
+  provider                = aws.prod
+  rest_api_id             = aws_api_gateway_rest_api.visitor_count_api.id
+  resource_id             = aws_api_gateway_resource.visitor_resource.id
+  http_method             = aws_api_gateway_method.post_method.http_method
+  integration_http_method = "POST"
+  type                    = "AWS_PROXY"
+  uri                     = aws_lambda_function.visitor_count_function.invoke_arn
+}
+
+# API Gateway Deployment
+resource "aws_api_gateway_deployment" "api_deployment" {
+  provider    = aws.prod
+  rest_api_id = aws_api_gateway_rest_api.visitor_count_api.id
+  stage_name  = "dev"
+  depends_on  = [aws_api_gateway_integration.lambda_integration]
+}
+
+# Lambda Permission for API Gateway
+resource "aws_lambda_permission" "api_gateway_permission" {
+  provider      = aws.prod
+  statement_id  = "AllowAPIGatewayInvoke"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.visitor_count_function.function_name
+  principal     = "apigateway.amazonaws.com"
+  source_arn    = "${aws_api_gateway_rest_api.visitor_count_api.execution_arn}/*/*"
 }
