@@ -9,3 +9,4 @@
 # CI/CD retry with function.zip committed
 # CI/CD retry with s3:GetBucketLogging permission
 # CI/CD retry with s3:GetLifecycleConfiguration permission
+# CI/CD retry with s3:GetReplicationConfiguration permission
