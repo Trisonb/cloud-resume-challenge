@@ -8,6 +8,7 @@ on:
       - 'cloudresume.html'
       - 'cloudresume.js'
       - 'cloudresume.css'
+      - 'function.zip'
       - '.github/workflows/deploy.yml'
 jobs:
   deploy:
@@ -27,6 +28,10 @@ jobs:
         aws configure list
         echo "Environment variables:"
         env | grep AWS_
+    - name: Debug Directory Contents
+      run: |
+        ls -la
+        if [ -f function.zip ]; then echo "function.zip exists"; else echo "function.zip missing"; fi
     - name: Install Terraform
       uses: hashicorp/setup-terraform@v3
       with:
