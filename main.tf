@@ -242,8 +242,15 @@ resource "aws_api_gateway_integration" "lambda_integration" {
 resource "aws_api_gateway_deployment" "api_deployment" {
   provider    = aws.prod
   rest_api_id = aws_api_gateway_rest_api.visitor_count_api.id
-  stage_name  = "dev"
   depends_on  = [aws_api_gateway_integration.lambda_integration]
+}
+
+# API Gateway Stage
+resource "aws_api_gateway_stage" "dev_stage" {
+  provider    = aws.prod
+  stage_name  = "dev"
+  rest_api_id = aws_api_gateway_rest_api.visitor_count_api.id
+  deployment_id = aws_api_gateway_deployment.api_deployment.id
 }
 
 # Lambda Permission for API Gateway

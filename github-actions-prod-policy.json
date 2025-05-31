@@ -6,7 +6,21 @@
       "Action": [
         "s3:PutObject",
         "s3:GetObject",
-        "s3:ListBucket"
+        "s3:ListBucket",
+        "s3:GetBucketPolicy",
+        "s3:PutBucketPolicy",
+        "s3:GetBucketAcl",
+        "s3:PutBucketAcl",
+        "s3:GetBucketCORS",
+        "s3:PutBucketCORS",
+        "s3:GetBucketWebsite",
+        "s3:PutBucketWebsite",
+        "s3:GetBucketVersioning",
+        "s3:PutBucketVersioning",
+        "s3:GetBucketLocation",
+        "s3:GetAccelerateConfiguration",
+        "s3:PutAccelerateConfiguration",
+        "s3:GetBucketRequestPayment"
       ],
       "Resource": [
         "arn:aws:s3:::trison-cloud-resume-prod-mjcsikwf",
@@ -20,7 +34,7 @@
         "cloudfront:GetInvalidation",
         "cloudfront:ListInvalidations"
       ],
-      "Resource": "arn:aws:cloudfront::442426863782:distribution/E3V232V07RULP0"
+      "Resource": "arn:aws:cloudfront::442426863782:distribution/E1Z7J2MV57SJA1"
     },
     {
       "Effect": "Allow",
@@ -28,12 +42,69 @@
         "s3:GetObject",
         "s3:PutObject",
         "s3:ListBucket",
-        "s3:DeleteObject"
+        "s3:DeleteObject",
+        "s3:GetBucketPolicy",
+        "s3:PutBucketPolicy",
+        "s3:GetBucketAcl",
+        "s3:PutBucketAcl",
+        "s3:GetBucketCORS",
+        "s3:PutBucketCORS",
+        "s3:GetBucketWebsite",
+        "s3:PutBucketWebsite",
+        "s3:GetBucketVersioning",
+        "s3:PutBucketVersioning",
+        "s3:GetBucketLocation",
+        "s3:GetAccelerateConfiguration",
+        "s3:PutAccelerateConfiguration",
+        "s3:GetBucketRequestPayment"
       ],
       "Resource": [
         "arn:aws:s3:::trison-terraform-state-1747864476",
         "arn:aws:s3:::trison-terraform-state-1747864476/*"
       ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "iam:GetRole",
+        "iam:ListRolePolicies",
+        "iam:ListAttachedRolePolicies",
+        "iam:PassRole"
+      ],
+      "Resource": [
+        "arn:aws:iam::442426863782:role/api-gateway-visitor-count-role",
+        "arn:aws:iam::442426863782:role/lambda-visitor-count-role"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "dynamodb:PutItem",
+        "dynamodb:GetItem",
+        "dynamodb:UpdateItem",
+        "dynamodb:DescribeTable"
+      ],
+      "Resource": "arn:aws:dynamodb:us-east-1:442426863782:table/visitor-count-table"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "lambda:InvokeFunction",
+        "lambda:GetFunction",
+        "lambda:UpdateFunctionCode",
+        "lambda:UpdateFunctionConfiguration"
+      ],
+      "Resource": "arn:aws:lambda:us-east-1:442426863782:function:visitor-count-function"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "apigateway:GET",
+        "apigateway:POST",
+        "apigateway:PUT",
+        "apigateway:DELETE"
+      ],
+      "Resource": "arn:aws:apigateway:us-east-1::/restapis/*"
     }
   ]
 }
