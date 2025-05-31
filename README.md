@@ -10,3 +10,4 @@
 # CI/CD retry with s3:GetBucketLogging permission
 # CI/CD retry with s3:GetLifecycleConfiguration permission
 # CI/CD retry with s3:GetReplicationConfiguration permission
+# CI/CD retry with updated CloudFront policy
