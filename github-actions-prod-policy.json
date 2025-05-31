@@ -3,25 +3,7 @@
   "Statement": [
     {
       "Effect": "Allow",
-      "Action": [
-        "s3:PutObject",
-        "s3:GetObject",
-        "s3:ListBucket",
-        "s3:GetBucketPolicy",
-        "s3:PutBucketPolicy",
-        "s3:GetBucketAcl",
-        "s3:PutBucketAcl",
-        "s3:GetBucketCORS",
-        "s3:PutBucketCORS",
-        "s3:GetBucketWebsite",
-        "s3:PutBucketWebsite",
-        "s3:GetBucketVersioning",
-        "s3:PutBucketVersioning",
-        "s3:GetBucketLocation",
-        "s3:GetAccelerateConfiguration",
-        "s3:PutAccelerateConfiguration",
-        "s3:GetBucketRequestPayment"
-      ],
+      "Action": "s3:*",
       "Resource": [
         "arn:aws:s3:::trison-cloud-resume-prod-mjcsikwf",
         "arn:aws:s3:::trison-cloud-resume-prod-mjcsikwf/*"
@@ -32,32 +14,15 @@
       "Action": [
         "cloudfront:CreateInvalidation",
         "cloudfront:GetInvalidation",
-        "cloudfront:ListInvalidations"
+        "cloudfront:ListInvalidations",
+        "cloudfront:GetDistribution",
+        "cloudfront:ListTagsForResource"
       ],
-      "Resource": "arn:aws:cloudfront::442426863782:distribution/E1Z7J2MV57SJA1"
+      "Resource": "arn:aws:cloudfront::442426863782:distribution/E3V232V07RULP0"
     },
     {
       "Effect": "Allow",
-      "Action": [
-        "s3:GetObject",
-        "s3:PutObject",
-        "s3:ListBucket",
-        "s3:DeleteObject",
-        "s3:GetBucketPolicy",
-        "s3:PutBucketPolicy",
-        "s3:GetBucketAcl",
-        "s3:PutBucketAcl",
-        "s3:GetBucketCORS",
-        "s3:PutBucketCORS",
-        "s3:GetBucketWebsite",
-        "s3:PutBucketWebsite",
-        "s3:GetBucketVersioning",
-        "s3:PutBucketVersioning",
-        "s3:GetBucketLocation",
-        "s3:GetAccelerateConfiguration",
-        "s3:PutAccelerateConfiguration",
-        "s3:GetBucketRequestPayment"
-      ],
+      "Action": "s3:*",
       "Resource": [
         "arn:aws:s3:::trison-terraform-state-1747864476",
         "arn:aws:s3:::trison-terraform-state-1747864476/*"
@@ -82,7 +47,8 @@
         "dynamodb:PutItem",
         "dynamodb:GetItem",
         "dynamodb:UpdateItem",
-        "dynamodb:DescribeTable"
+        "dynamodb:DescribeTable",
+        "dynamodb:CreateTable"
       ],
       "Resource": "arn:aws:dynamodb:us-east-1:442426863782:table/visitor-count-table"
     },
@@ -104,7 +70,10 @@
         "apigateway:PUT",
         "apigateway:DELETE"
       ],
-      "Resource": "arn:aws:apigateway:us-east-1::/restapis/*"
+      "Resource": [
+        "arn:aws:apigateway:us-east-1::/restapis/*",
+        "arn:aws:apigateway:us-east-1::/restapis"
+      ]
     }
   ]
 }

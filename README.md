@@ -11,3 +11,4 @@
 # CI/CD retry with s3:GetLifecycleConfiguration permission
 # CI/CD retry with s3:GetReplicationConfiguration permission
 # CI/CD retry with updated CloudFront policy
+# CI/CD retry with dynamodb:CreateTable and apigateway:POST
