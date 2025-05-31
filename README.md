@@ -12,3 +12,4 @@
 # CI/CD retry with s3:GetReplicationConfiguration permission
 # CI/CD retry with updated CloudFront policy
 # CI/CD retry with dynamodb:CreateTable and apigateway:POST
+# CI/CD retry with s3:GetBucketTagging permission
