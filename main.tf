@@ -4,15 +4,17 @@ data "aws_caller_identity" "current" {}
 
 # Provider for Production Account
 provider "aws" {
-  region  = "us-east-1"
-  alias   = "prod"
+  region = "us-east-1"
+  alias  = "prod"
+  skip_credentials_validation = true
+  skip_requesting_account_id  = true
 }
 
 terraform {
   backend "s3" {
-    bucket  = "trison-terraform-state-1747864476"
-    key     = "terraform.tfstate"
-    region  = "us-east-1"
+    bucket = "trison-terraform-state-1747864476"
+    key    = "terraform.tfstate"
+    region = "us-east-1"
   }
 }
 
