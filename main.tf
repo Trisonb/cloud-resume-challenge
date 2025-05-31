@@ -4,14 +4,17 @@ data "aws_caller_identity" "current" {}
 
 # Provider for Production Account
 provider "aws" {
-  region = "us-east-1"
+  profile = "prod-account"
+  region  = "us-east-1"
+  alias   = "prod"
 }
 
 terraform {
   backend "s3" {
-    bucket = "trison-terraform-state-1747864476"
-    key    = "terraform.tfstate"
-    region = "us-east-1"
+    bucket  = "trison-terraform-state-1747864476"
+    key     = "terraform.tfstate"
+    region  = "us-east-1"
+    profile = "prod-account"
   }
 }
 
@@ -24,11 +27,13 @@ resource "random_string" "bucket_suffix" {
 
 # S3 Bucket for Production Static Website
 resource "aws_s3_bucket" "website_bucket" {
-  bucket = "trison-cloud-resume-prod-${random_string.bucket_suffix.result}"
+  provider = aws.prod
+  bucket   = "trison-cloud-resume-prod-${random_string.bucket_suffix.result}"
 }
 
 # S3 Bucket Public Access Block for Production
 resource "aws_s3_bucket_public_access_block" "website_public_access" {
+  provider                = aws.prod
   bucket                  = aws_s3_bucket.website_bucket.id
   block_public_acls       = true
   block_public_policy     = true
@@ -38,8 +43,9 @@ resource "aws_s3_bucket_public_access_block" "website_public_access" {
 
 # S3 Bucket Policy for Production
 resource "aws_s3_bucket_policy" "website_policy" {
-  bucket = aws_s3_bucket.website_bucket.id
-  policy = jsonencode({
+  provider = aws.prod
+  bucket   = aws_s3_bucket.website_bucket.id
+  policy   = jsonencode({
     Version = "2008-10-17"
     Id      = "PolicyForCloudFrontPrivateContent"
     Statement = [
@@ -63,13 +69,14 @@ resource "aws_s3_bucket_policy" "website_policy" {
 
 # CloudFront Distribution for Production
 resource "aws_cloudfront_distribution" "website_cdn_prod" {
+  provider = aws.prod
   origin {
-    domain_name           = aws_s3_bucket.website_bucket.bucket_regional_domain_name
-    origin_id             = "trison-cloud-resume-prod-${random_string.bucket_suffix.result}.s3.us-east-1.amazonaws.com"
+    domain_name              = aws_s3_bucket.website_bucket.bucket_regional_domain_name
+    origin_id                = "trison-cloud-resume-prod-${random_string.bucket_suffix.result}.s3.us-east-1.amazonaws.com"
     origin_access_control_id = "E3F28HFE59CNN4"
   }
   default_cache_behavior {
-    target_origin_id = "trison-cloud-resume-prod-${random_string.bucket_suffix.result}.s3.us-east-1.amazonaws.com"
+    target_origin_id       = "trison-cloud-resume-prod-${random_string.bucket_suffix.result}.s3.us-east-1.amazonaws.com"
     allowed_methods        = ["GET", "HEAD"]
     cached_methods         = ["GET", "HEAD"]
     compress               = false
@@ -104,7 +111,8 @@ resource "aws_cloudfront_distribution" "website_cdn_prod" {
 
 # IAM Role for API Gateway
 resource "aws_iam_role" "api_gateway_role" {
-  name = "api-gateway-visitor-count-role"
+  provider = aws.prod
+  name     = "api-gateway-visitor-count-role"
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
@@ -121,7 +129,8 @@ resource "aws_iam_role" "api_gateway_role" {
 
 # IAM Role for Production Lambda
 resource "aws_iam_role" "lambda_role" {
-  name = "lambda-visitor-count-role"
+  provider = aws.prod
+  name     = "lambda-visitor-count-role"
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
@@ -135,11 +144,3 @@ resource "aws_iam_role" "lambda_role" {
     ]
   })
 }
-
-# Re-trigger workflow
-# Re-trigger workflow
-# Re-trigger workflow with updated secrets
-# Re-trigger workflow with new credentials
-# Re-trigger workflow to test prod secrets
-# Re-trigger workflow with fresh test credentials# Re-trigger workflow with fresh prod credentials
-# Re-trigger workflow with updated S3 permissions
