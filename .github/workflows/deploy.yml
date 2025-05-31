@@ -12,62 +12,35 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    permissions:
-      id-token: write
-      contents: read
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-    - name: Debug OIDC Token
-      run: |
-        echo "GITHUB_REPOSITORY: $GITHUB_REPOSITORY"
-        echo "GITHUB_ACTOR: $GITHUB_ACTOR"
-        echo "GITHUB_REF: $GITHUB_REF"
-        JWT_TOKEN=$(curl -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL" | jq -r '.value')
-        echo "JWT_TOKEN (partial): ${JWT_TOKEN:0:50}..."
-        echo "Decoded JWT claims:"
-        echo $JWT_TOKEN | jq -R 'split(".") | .[1] | @base64d | fromjson'
-      env:
-        ACTIONS_ID_TOKEN_REQUEST_TOKEN: ${{ secrets.ACTIONS_ID_TOKEN_REQUEST_TOKEN }}
-        ACTIONS_ID_TOKEN_REQUEST_URL: ${{ secrets.ACTIONS_ID_TOKEN_REQUEST_URL }}
     - name: Configure AWS Credentials
-      id: creds
       uses: aws-actions/configure-aws-credentials@v4
       with:
-        role-to-assume: arn:aws:iam::442426863782:role/GitHubActionsProdRole
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-1
-        role-session-name: GitHubActionsSession
     - name: Debug AWS Credentials
       run: |
-        echo "AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID:0:10}..."
-        echo "AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY:0:10}..."
-        echo "AWS_SESSION_TOKEN: ${AWS_SESSION_TOKEN:0:10}..."
         aws sts get-caller-identity || echo "Failed to get caller identity"
-        echo "Action outputs: ${{ toJson(steps.creds.outputs) }}"
         aws configure list
         echo "Environment variables:"
         env | grep AWS_
-      env:
-        AWS_ACCESS_KEY_ID: ${{ steps.creds.outputs.aws-access-key-id }}
-        AWS_SECRET_ACCESS_KEY: ${{ steps.creds.outputs.aws-secret-access-key }}
-        AWS_SESSION_TOKEN: ${{ steps.creds.outputs.aws-session-token }}
     - name: Install Terraform
       uses: hashicorp/setup-terraform@v3
       with:
         terraform_version: 1.9.0
     - name: Terraform Init
-      env:
-        AWS_ACCESS_KEY_ID: ${{ steps.creds.outputs.aws-access-key-id }}
-        AWS_SECRET_ACCESS_KEY: ${{ steps.creds.outputs.aws-secret-access-key }}
-        AWS_SESSION_TOKEN: ${{ steps.creds.outputs.aws-session-token }}
-        TF_LOG: TRACE
       run: terraform init -reconfigure
-    - name: Terraform Apply
       env:
-        AWS_ACCESS_KEY_ID: ${{ steps.creds.outputs.aws-access-key-id }}
-        AWS_SECRET_ACCESS_KEY: ${{ steps.creds.outputs.aws-secret-access-key }}
-        AWS_SESSION_TOKEN: ${{ steps.creds.outputs.aws-session-token }}
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    - name: Terraform Apply
       run: terraform apply -auto-approve
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
     - name: Upload static files to S3
       run: |
         aws s3 cp cloudresume.html s3://trison-cloud-resume-prod-mjcsikwf/cloudresume.html
