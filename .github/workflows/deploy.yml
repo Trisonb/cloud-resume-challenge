@@ -28,8 +28,16 @@ jobs:
       with:
         terraform_version: 1.9.0
     - name: Terraform Init
+      env:
+        AWS_ACCESS_KEY_ID: ${{ steps.configure-aws-credentials.outputs.aws-access-key-id }}
+        AWS_SECRET_ACCESS_KEY: ${{ steps.configure-aws-credentials.outputs.aws-secret-access-key }}
+        AWS_SESSION_TOKEN: ${{ steps.configure-aws-credentials.outputs.aws-session-token }}
       run: terraform init -reconfigure
     - name: Terraform Apply
+      env:
+        AWS_ACCESS_KEY_ID: ${{ steps.configure-aws-credentials.outputs.aws-access-key-id }}
+        AWS_SECRET_ACCESS_KEY: ${{ steps.configure-aws-credentials.outputs.aws-secret-access-key }}
+        AWS_SESSION_TOKEN: ${{ steps.configure-aws-credentials.outputs.aws-session-token }}
       run: terraform apply -auto-approve
     - name: Upload static files to S3
       run: |
@@ -38,4 +46,4 @@ jobs:
         aws s3 cp cloudresume.css s3://trison-cloud-resume-prod-mjcsikwf/cloudresume.css
     - name: Create CloudFront Invalidation
       run: |
-        aws cloudfront create-invalidation --distribution-id E3V232V07RULP0 --paths "/*"
+        aws cloudfront create-invalidation --distribution-id E1Z7J2MV57SJA1 --paths "/*"
