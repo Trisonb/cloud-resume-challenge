@@ -4,7 +4,6 @@ data "aws_caller_identity" "current" {}
 
 # Provider for Production Account
 provider "aws" {
-  profile = "prod-account"
   region  = "us-east-1"
   alias   = "prod"
 }

@@ -19,6 +19,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
     - name: Configure AWS Credentials for Prod Account
+      id: configure-aws-credentials
       uses: aws-actions/configure-aws-credentials@v4
       with:
         role-to-assume: arn:aws:iam::442426863782:role/GitHubActionsProdRole
@@ -32,7 +33,7 @@ jobs:
         AWS_ACCESS_KEY_ID: ${{ steps.configure-aws-credentials.outputs.aws-access-key-id }}
         AWS_SECRET_ACCESS_KEY: ${{ steps.configure-aws-credentials.outputs.aws-secret-access-key }}
         AWS_SESSION_TOKEN: ${{ steps.configure-aws-credentials.outputs.aws-session-token }}
-      run: terraform init -reconfigure
+      run: terraform init -reconfigure -backend-config="access_key=$AWS_ACCESS_KEY_ID" -backend-config="secret_key=$AWS_SECRET_ACCESS_KEY" -backend-config="session_token=$AWS_SESSION_TOKEN"
     - name: Terraform Apply
       env:
         AWS_ACCESS_KEY_ID: ${{ steps.configure-aws-credentials.outputs.aws-access-key-id }}
