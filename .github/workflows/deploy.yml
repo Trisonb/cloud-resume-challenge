@@ -22,14 +22,12 @@ jobs:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-1
-        aws-profile: prod-account
     - name: Configure AWS Credentials (Test)
       uses: aws-actions/configure-aws-credentials@v4
       with:
         aws-access-key-id: ${{ secrets.TEST_AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.TEST_AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-1
-        aws-profile: test-account
     - name: Setup AWS CLI Credentials File
       run: |
         mkdir -p ~/.aws
@@ -58,6 +56,7 @@ jobs:
       env:
         AWS_PROFILE: prod-account
     - name: Terraform Plan
+      id: plan
       run: terraform plan -detailed-exitcode
       env:
         AWS_PROFILE: prod-account
@@ -68,9 +67,9 @@ jobs:
         AWS_PROFILE: prod-account
     - name: Upload static files to S3
       run: |
-        aws s3 cp cloudresume.html s3://trison-cloud-resume-prod-mjcsikwf/cloudresume.html
-        aws s3 cp cloudresume.js s3://trison-cloud-resume-prod-mjcsikwf/cloudresume.js
-        aws s3 cp cloudresume.css s3://trison-cloud-resume-prod-mjcsikwf/cloudresume.css
+        aws s3 cp cloudresume.html s3://trison-cloud-resume-prod-mjcsikwf/cloudresume.html --profile prod-account
+        aws s3 cp cloudresume.js s3://trison-cloud-resume-prod-mjcsikwf/cloudresume.js --profile prod-account
+        aws s3 cp cloudresume.css s3://trison-cloud-resume-prod-mjcsikwf/cloudresume.css --profile prod-account
     - name: Create CloudFront Invalidation
       run: |
-        aws cloudfront create-invalidation --distribution-id E3V232V07RULP0 --paths "/*"
+        aws cloudfront create-invalidation --distribution-id E3V232V07RULP0 --paths "/*" --profile prod-account
