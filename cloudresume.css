@@ -1,10 +1,156 @@
-    h2 {
-        text-align: center;
+body {
+    font-family: Georgia, "Times New Roman", Garamond, Palatino, serif;
+    font-size: 11pt;
+    line-height: 1.3;
+    color: #000;
+}
+
+.resume-container {
+    max-width: 6.5in;
+    /* Matches LaTeX 0.75in margins on A4 */
+    margin: 0 auto;
+    padding: 0.75in;
+    background-color: #ffffff;
+}
+
+.section-title {
+    font-size: 13pt;
+    /* Matches LaTeX \large */
+    font-weight: bold;
+    text-transform: capitalize;
+    /* Capitalizes each word */
+    letter-spacing: 0.02em;
+    border-bottom: 1px solid #000;
+    padding-bottom: 0.1in;
+    margin-top: 0.3in;
+    margin-bottom: 0.15in;
+}
+
+.job-title {
+    font-weight: bold;
+    font-size: 11pt;
+}
+
+.dates {
+    font-style: italic;
+    color: #333;
+    font-size: 11pt;
+}
+
+.company {
+    font-style: italic;
+    font-size: 11pt;
+}
+
+h1 {
+    font-size: 22pt;
+    /* Matches LaTeX \LARGE */
+    font-weight: bold;
+    text-transform: uppercase;
+    /* Matches PDF */
+    margin-bottom: 0.05in;
+    /* Tight spacing as in PDF */
+}
+
+.header-contact {
+    font-size: 11pt;
+    margin-bottom: 0.3in;
+    /* Matches PDF spacing */
+}
+
+.header-contact a {
+    color: #0000EE;
+    text-decoration: underline;
+}
+
+.header-contact a:hover {
+    text-decoration: underline;
+}
+
+.header-contact span {
+    margin: 0 0.5em;
+    /* Space around separators */
+}
+
+p,
+ul {
+    margin-bottom: 0.2in;
+}
+
+ul {
+    list-style-type: disc;
+    padding-left: 0.5in;
+}
+
+li {
+    margin-bottom: 0.1in;
+}
+
+a {
+    color: #0000EE;
+    text-decoration: underline;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.mb-8 {
+    margin-bottom: 2rem;
+}
+
+.mb-6 {
+    margin-bottom: 1.5rem;
+}
+
+.mb-4 {
+    margin-bottom: 1rem;
+}
+
+.ml-4 {
+    margin-left: 1rem;
+}
+
+.p-8 {
+    padding: 2rem;
+}
+
+.bg-white {
+    background-color: #ffffff;
+}
+
+.bg-gray-100 {
+    background-color: #f3f4f6;
+}
+
+.text-3xl {
+    font-size: 1.875rem;
+}
+
+.font-bold {
+    font-weight: bold;
+}
+
+.text-blue-600 {
+    color: #2563eb;
+}
+
+@media print {
+    body {
+        background-color: #ffffff;
     }
 
-    body {
-        background-color: lightblue;
-        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-        padding-left: 100px;
-        padding-right: 100px;
+    .resume-container {
+        padding: 0;
+        margin: 0;
+        width: 100%;
     }
+
+    .bg-gray-100 {
+        background-color: #ffffff;
+    }
+}
