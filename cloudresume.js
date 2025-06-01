@@ -27,8 +27,7 @@ async function incrementVisitorCount(retryCount = 0, maxRetries = 3) {
         const data = await response.json();
         console.log("Response data:", data);
         if (data && data.message) {
-            const count = data.message.match(/\d+/) ? data.message.match(/\d+/)[0] : 'Error';
-            document.getElementById('visitor-count').textContent = count;
+            document.getElementById('visitor-count').textContent = data.message;
         } else {
             throw new Error('Invalid response format: missing message field');
         }
