@@ -46,13 +46,11 @@ jobs:
     - name: Terraform Init
       run: terraform init -reconfigure
       env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_PROFILE: prod-account
     - name: Terraform Apply
       run: terraform apply -auto-approve
       env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_PROFILE: prod-account
     - name: Upload static files to S3
       run: |
         aws s3 cp cloudresume.html s3://trison-cloud-resume-prod-mjcsikwf/cloudresume.html
