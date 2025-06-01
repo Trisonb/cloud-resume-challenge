@@ -57,7 +57,12 @@ jobs:
       run: terraform init -reconfigure
       env:
         AWS_PROFILE: prod-account
+    - name: Terraform Plan
+      run: terraform plan -detailed-exitcode
+      env:
+        AWS_PROFILE: prod-account
     - name: Terraform Apply
+      if: steps.plan.outputs.exitcode == 2
       run: terraform apply -auto-approve
       env:
         AWS_PROFILE: prod-account
