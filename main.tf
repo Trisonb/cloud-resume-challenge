@@ -1,8 +1,8 @@
-# Updated CI/CD test comment - May 31, 2025
+# Updated CI/CD for Cloud Resume Challenge - May 31, 2025
 
 data "aws_caller_identity" "current" {}
 
-# Provider for Production Account
+# Provider for Production Account (S3, CloudFront)
 provider "aws" {
   region = "us-east-1"
   alias  = "prod"
@@ -10,11 +10,19 @@ provider "aws" {
   skip_requesting_account_id  = true
 }
 
+# Provider for Test Account (DynamoDB, Lambda, API Gateway)
+provider "aws" {
+  region = "us-east-1"
+  alias  = "test"
+  profile = "test-account"
+}
+
 terraform {
   backend "s3" {
-    bucket = "trison-terraform-state-1747864476"
-    key    = "terraform.tfstate"
-    region = "us-east-1"
+    bucket  = "trison-terraform-state-1747864476"
+    key     = "terraform.tfstate"
+    region  = "us-east-1"
+    profile = "prod-account"
   }
 }
 
@@ -59,7 +67,7 @@ resource "aws_s3_bucket_policy" "website_policy" {
         Resource  = "${aws_s3_bucket.website_bucket.arn}/*"
         Condition = {
           StringEquals = {
-            "AWS:SourceArn" = "arn:aws:cloudfront::${data.aws_caller_identity.current.account_id}:distribution/E1Z7J2MV57SJA1"
+            "AWS:SourceArn" = "arn:aws:cloudfront::${data.aws_caller_identity.current.account_id}:distribution/E3V232V07RULP0"
           }
         }
       }
@@ -103,15 +111,15 @@ resource "aws_cloudfront_distribution" "website_cdn_prod" {
     }
   }
   viewer_certificate {
-    acm_certificate_arn      = "arn:aws:acm:us-east-1:442426863782:certificate/767456a5-a4b8-4f6c-8d59-baa6e2c891d2"
+    acm_certificate_arn      = "arn:aws:acm:us-east-1:442426863782:certificate/dc88bf72-dfc4-4352-bf04-99c4cb5c2961"
     ssl_support_method       = "sni-only"
     minimum_protocol_version = "TLSv1.2_2021"
   }
 }
 
-# DynamoDB Table for Visitor Count
+# DynamoDB Table for Visitor Count (Test Account)
 resource "aws_dynamodb_table" "visitor_count_table" {
-  provider       = aws.prod
+  provider       = aws.test
   name           = "visitor-count-table"
   billing_mode   = "PAY_PER_REQUEST"
   hash_key       = "user"
@@ -121,15 +129,16 @@ resource "aws_dynamodb_table" "visitor_count_table" {
   }
 }
 
-# Lambda Function for Visitor Count
+# Lambda Function for Visitor Count (Test Account)
 resource "aws_lambda_function" "visitor_count_function" {
-  provider         = aws.prod
+  provider         = aws.test
   function_name    = "visitor-count-function"
   handler          = "lambda_function.lambda_handler"
   runtime          = "python3.9"
   filename         = "function.zip"
   source_code_hash = filebase64sha256("function.zip")
-  role             = aws_iam_role.lambda_role.arn
+  role             = "arn:aws:iam::940482418939:role/lambda-visitor-count-role-test"
+  timeout          = 10
   environment {
     variables = {
       TABLE_NAME = aws_dynamodb_table.visitor_count_table.name
@@ -137,9 +146,9 @@ resource "aws_lambda_function" "visitor_count_function" {
   }
 }
 
-# IAM Role for API Gateway
+# IAM Role for API Gateway (Test Account)
 resource "aws_iam_role" "api_gateway_role" {
-  provider = aws.prod
+  provider = aws.test
   name     = "api-gateway-visitor-count-role"
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -155,9 +164,9 @@ resource "aws_iam_role" "api_gateway_role" {
   })
 }
 
-# IAM Role for Production Lambda
+# IAM Role for Lambda (Test Account)
 resource "aws_iam_role" "lambda_role" {
-  provider = aws.prod
+  provider = aws.test
   name     = "lambda-visitor-count-role"
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -173,9 +182,45 @@ resource "aws_iam_role" "lambda_role" {
   })
 }
 
-# IAM Policy for Lambda to Access DynamoDB
+# Managed IAM Policy for Lambda to Access DynamoDB
+resource "aws_iam_policy" "lambda_visitor_count_policy" {
+  provider    = aws.test
+  name        = "lambda-visitor-count-policy"
+  description = "Policy for Lambda to access DynamoDB and CloudWatch Logs"
+  policy      = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "dynamodb:GetItem",
+          "dynamodb:PutItem"
+        ]
+        Resource = aws_dynamodb_table.visitor_count_table.arn
+      },
+      {
+        Effect = "Allow"
+        Action = [
+          "logs:CreateLogGroup",
+          "logs:CreateLogStream",
+          "logs:PutLogEvents"
+        ]
+        Resource = "*"
+      }
+    ]
+  })
+}
+
+# Attach the Managed Policy to the Lambda Role
+resource "aws_iam_role_policy_attachment" "lambda_policy_attachment" {
+  provider   = aws.test
+  role       = aws_iam_role.lambda_role.name
+  policy_arn = aws_iam_policy.lambda_visitor_count_policy.arn
+}
+
+/*# IAM Policy for Lambda to Access DynamoDB (Test Account)
 resource "aws_iam_role_policy" "lambda_dynamodb_policy" {
-  provider = aws.prod
+  provider = aws.test
   name     = "lambda-dynamodb-policy"
   role     = aws_iam_role.lambda_role.id
   policy   = jsonencode({
@@ -202,63 +247,65 @@ resource "aws_iam_role_policy" "lambda_dynamodb_policy" {
     ]
   })
 }
+*/
 
-# API Gateway REST API
+# API Gateway REST API (Test Account)
 resource "aws_api_gateway_rest_api" "visitor_count_api" {
-  provider = aws.prod
+  provider = aws.test
   name     = "visitor-count-api"
   description = "API for visitor count"
 }
 
-# API Gateway Resource
+# API Gateway Resource (Test Account)
 resource "aws_api_gateway_resource" "visitor_resource" {
-  provider    = aws.prod
+  provider    = aws.test
   rest_api_id = aws_api_gateway_rest_api.visitor_count_api.id
   parent_id   = aws_api_gateway_rest_api.visitor_count_api.root_resource_id
   path_part   = "visitor"
 }
 
-# API Gateway Method (POST)
+# API Gateway Method (POST) (Test Account)
 resource "aws_api_gateway_method" "post_method" {
-  provider      = aws.prod
+  provider      = aws.test
   rest_api_id   = aws_api_gateway_rest_api.visitor_count_api.id
   resource_id   = aws_api_gateway_resource.visitor_resource.id
   http_method   = "POST"
   authorization = "NONE"
 }
 
-# API Gateway Integration with Lambda
+# API Gateway Integration with Lambda (Test Account)
 resource "aws_api_gateway_integration" "lambda_integration" {
-  provider                = aws.prod
+  provider                = aws.test
   rest_api_id             = aws_api_gateway_rest_api.visitor_count_api.id
   resource_id             = aws_api_gateway_resource.visitor_resource.id
   http_method             = aws_api_gateway_method.post_method.http_method
   integration_http_method = "POST"
   type                    = "AWS_PROXY"
   uri                     = aws_lambda_function.visitor_count_function.invoke_arn
+  credentials             = aws_iam_role.api_gateway_role.arn
 }
 
-# API Gateway Deployment
+# API Gateway Deployment (Test Account)
 resource "aws_api_gateway_deployment" "api_deployment" {
-  provider    = aws.prod
+  provider    = aws.test
   rest_api_id = aws_api_gateway_rest_api.visitor_count_api.id
   depends_on  = [aws_api_gateway_integration.lambda_integration]
 }
 
-# API Gateway Stage
+# API Gateway Stage (Test Account)
 resource "aws_api_gateway_stage" "dev_stage" {
-  provider    = aws.prod
-  stage_name  = "dev"
+  provider    = aws.test
+  stage_name  = "Dev"
   rest_api_id = aws_api_gateway_rest_api.visitor_count_api.id
   deployment_id = aws_api_gateway_deployment.api_deployment.id
 }
 
-# Lambda Permission for API Gateway
+# Lambda Permission for API Gateway (Test Account)
 resource "aws_lambda_permission" "api_gateway_permission" {
-  provider      = aws.prod
-  statement_id  = "AllowAPIGatewayInvoke"
+  provider      = aws.test
+  statement_id  = "AllowAPIGatewayInvokeNew2"
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.visitor_count_function.function_name
   principal     = "apigateway.amazonaws.com"
-  source_arn    = "${aws_api_gateway_rest_api.visitor_count_api.execution_arn}/*/*"
+  source_arn    = "${aws_api_gateway_rest_api.visitor_count_api.execution_arn}/*/POST/visitor"
 }
