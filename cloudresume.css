@@ -124,7 +124,8 @@ a:hover {
 }
 
 .bg-gray-100 {
-    background-color: #f3f4f6;
+    background-color: lightblue;
+    /* Changed from #f3f4f6 to lightblue */
 }
 
 .text-3xl {
