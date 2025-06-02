@@ -64,6 +64,7 @@ jobs:
       run: |
         aws s3 cp cloudresume.html s3://trison-cloud-resume-prod-mjcsikwf/cloudresume.html --profile prod-account
         aws s3 cp cloudresume.js s3://trison-cloud-resume-prod-mjcsikwf/cloudresume.js --profile prod-account
+        aws s3 cp cloudresume.html s3://trison-cloud-resume-prod-mjcsikwf/cloudresume.css --profile prod-account
         aws s3 sync . s3://trison-cloud-resume-prod-mjcsikwf --delete --profile prod-account
     - name: Create CloudFront Invalidation
       run: |
