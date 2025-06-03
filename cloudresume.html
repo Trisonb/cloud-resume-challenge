@@ -4,34 +4,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trison's Resume</title>
+    <title>Trison's Cloud Resume</title>
     <link rel="stylesheet" href="cloudresume.css">
 </head>
 
 <body>
     <div id="visitor-count"></div>
-    <p>Updated on June 1st, 2025 >:D </p>
     <div class="resume-container bg-gray-100 p-8">
         <!-- Header -->
-        <div class="text-center mb-8">
+        <header class="text-center mb-8">
             <h1>Trison Braithwaite</h1>
             <p class="header-contact">
-                <a href="mailto:trisonb@example.com">trisonb@gmail.com</a>
+                <a href="mailto:trisonb@example.com" class="text-blue-600 hover:underline">trisonb@gmail.com</a>
                 <span>|</span>
                 (917) 963-6927
                 <span>|</span>
-                <a
-                    href="https://www.linkedin.com/in/trison-braithwaite-80a243141/">linkedin.com/in/trison-braithwaite</a>
+                <a href="https://www.linkedin.com/in/trison-braithwaite-80a243141/"
+                    class="text-blue-600 hover:underline">LinkedIn</a>
             </p>
-        </div>
+        </header>
 
         <!-- Objective -->
         <section class="mb-6">
             <h2 class="section-title">Objective</h2>
-            <p>Dynamic professional with foundational knowledge in cloud computing, AWS technologies, and strategic
-                communication,
-                seeking a cloud security role to leverage proficiency in AWS tools, with experience in projects to
-                enhance organizational security and innovation.</p>
+            <p>Dynamic professional with expertise in cloud computing, AWS technologies, and strategic communication,
+                seeking a cloud security role to apply proficiency in cloud tools and hands-on project experience to
+                enhance organizational security and drive innovation.</p>
         </section>
 
         <!-- Education -->
@@ -39,8 +37,8 @@
             <h2 class="section-title">Education</h2>
             <div>
                 <p class="job-title">Bachelor of Arts in Political Science</p>
-                <p class="dates">2020</p>
                 <p class="company">CUNY John Jay College of Criminal Justice, New York, NY</p>
+                <p class="dates">Graduated: 2020</p>
             </div>
         </section>
 
@@ -56,16 +54,17 @@
         <section class="mb-6">
             <h2 class="section-title">Skills</h2>
             <ul class="list-disc list-inside">
-                <li><strong>Cloud Computing</strong>: Proficient in AWS S3, Lambda, API Gateway, DynamoDB, Route 53,
-                    CloudFront, and ACM, demonstrated through successful completion of the <a
-                        href="https://cloudresumechallenge.dev/docs/the-challenge/aws/"
+                <li><strong>Cloud Computing & Security</strong>: Proficient in AWS S3, Lambda, API Gateway, DynamoDB,
+                    Route 53, CloudFront, ACM, and IAM, with hands-on experience in secure multi-account management,
+                    infrastructure-as-code (Terraform), and CI/CD automation via GitHub Actions, demonstrated through
+                    the <a href="https://cloudresumechallenge.dev/docs/the-challenge/aws/"
                         class="text-blue-600 hover:underline">Cloud Resume Challenge</a>.</li>
                 <li><strong>Video Production</strong>: Expert in conceptualization, filming, and editing, creating
                     compelling content for large audiences.</li>
                 <li><strong>Strategic Communication</strong>: Skilled in crafting press releases, media advisories, and
-                    talking points.</li>
-                <li><strong>Software</strong>: Adobe Premiere, Mailchimp, Action Network, Cision, TV Eyes, social media
-                    platforms.</li>
+                    talking points for impactful campaigns.</li>
+                <li><strong>Software Proficiency</strong>: Adobe Premiere, Mailchimp, Action Network, Cision, TV Eyes,
+                    social media platforms.</li>
             </ul>
         </section>
 
@@ -73,18 +72,24 @@
         <section class="mb-6">
             <h2 class="section-title">Achievements</h2>
             <ul class="list-disc list-inside">
-                <li>Completed the Cloud Resume Challenge, building this serverless web application using AWS
-                    technologies.</li>
-                <li>Developed proficiency in AWS SSO and CLI, enabling secure multi-account management and
-                    infrastructure deployment with Terraform, adopting cutting-edge practices used by professional cloud
-                    teams during the Cloud Resume Challenge.</li>
-                <li>Configured and managed CI/CD pipelines with GitHub Actions, automating deployment and CloudFront
-                    invalidation for this cloud-based resume website.</li>
-                <li>Helped secure Democratic Senate seats in 2022 (Fetterman) and 2024 (Gallego) through impactful ad
-                    campaigns.</li>
-                <li>Received multiple AAPC Pollie Awards, including Best Digital Campaign, Best Use of Opposition
-                    Research, Best Viral Campaign, and Best in Show.</li>
-                <li>Generated millions of organic views and sparked news stories through viral video content.</li>
+                <li>Completed the Cloud Resume Challenge (CRC), building <strong>this</strong> serverless web
+                    application on AWS,
+                    integrating S3, CloudFront, API Gateway, Lambda, DynamoDB, and Route 53, with automated deployments
+                    via GitHub Actions.</li>
+                <li>Implemented secure multi-account management using AWS SSO and CLI, managing separate production
+                    and test accounts, adopting professional cloud practices during
+                    the CRC.</li>
+                <li>Automated infrastructure deployment with Terraform, defining resources like S3 buckets, CloudFront
+                    distributions, and API Gateway, ensuring repeatable and secure deployments during the CRC.</li>
+                <li>Troubleshot and optimized CI/CD pipelines with GitHub Actions, automating S3 uploads and CloudFront
+                    invalidations, resolving deployment issues to ensure consistent updates for this resume website.
+                </li>
+                <li>Contributed to securing Democratic Senate seats in 2022 (Fetterman) and 2024 (Gallego) through
+                    impactful ad campaigns, leveraging strategic communication and video production.</li>
+                <li>Earned multiple AAPC Pollie Awards, including Best Digital Campaign, Best Use of Opposition
+                    Research, Best Viral Campaign, and Best in Show, for innovative political advertisements.</li>
+                <li>Generated millions of organic views and sparked news stories through viral video content,
+                    demonstrating effective audience engagement.</li>
             </ul>
         </section>
 
@@ -93,8 +98,8 @@
             <h2 class="section-title">Professional Experience</h2>
             <div class="mb-4">
                 <p class="job-title">Head Videographer</p>
-                <p class="dates">October 2020 – Present</p>
                 <p class="company">New Deal Strategies</p>
+                <p class="dates">October 2020 – Present</p>
                 <ul class="list-disc list-inside ml-4">
                     <li>Led video production, transitioning from writing to head videographer, delivering high-impact
                         content under tight deadlines.</li>
@@ -104,14 +109,14 @@
                         millions of organic views and extensive media coverage.</li>
                     <li>Created award-winning advertisements recognized by AAPC Pollie Awards, including Best Digital
                         Campaign and Best Viral Campaign.</li>
-                    <li>Created, managed, and built a TikTok account, growing it to over 75,000 followers and achieving
-                        more than 5 million likes through strategic content production.</li>
+                    <li>Built and managed a TikTok account, growing it to over 75,000 followers and achieving more than
+                        5 million likes through strategic content production.</li>
                 </ul>
             </div>
             <div class="mb-4">
-                <p class="job-title">Financial Analyst Internship</p>
-                <p class="dates">August 2019 – November 2019</p>
+                <p class="job-title">Financial Analyst Intern</p>
                 <p class="company">Bolivian Llama Party</p>
+                <p class="dates">August 2019 – November 2019</p>
                 <ul class="list-disc list-inside ml-4">
                     <li>Conducted cost analysis to optimize operational efficiency, improving financial performance.
                     </li>
@@ -122,8 +127,8 @@
             </div>
             <div>
                 <p class="job-title">Prep Cook</p>
-                <p class="dates">May 2016 – March 2020</p>
                 <p class="company">Bolivian Llama Party</p>
+                <p class="dates">May 2016 – March 2020</p>
                 <ul class="list-disc list-inside ml-4">
                     <li>Assisted in preparing culinary dishes, ensuring adherence to quality standards.</li>
                     <li>Managed kitchen tasks to support efficient operations and timely meal preparation.</li>
