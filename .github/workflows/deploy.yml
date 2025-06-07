@@ -10,6 +10,8 @@ on:
       - 'cloudresume.css'
       - 'function.zip'
       - '.github/workflows/deploy.yml'
+permissions:
+  contents: read
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -22,26 +24,6 @@ jobs:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-1
-    - name: Setup AWS CLI Credentials File
-      run: |
-        mkdir -p ~/.aws
-        echo "[prod-account]" > ~/.aws/credentials
-        echo "aws_access_key_id = ${{ secrets.AWS_ACCESS_KEY_ID }}" >> ~/.aws/credentials
-        echo "aws_secret_access_key = ${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> ~/.aws/credentials
-        echo "[test-account]" >> ~/.aws/credentials
-        echo "aws_access_key_id = ${{ secrets.TEST_AWS_ACCESS_KEY_ID }}" >> ~/.aws/credentials
-        echo "aws_secret_access_key = ${{ secrets.TEST_AWS_SECRET_ACCESS_KEY }}" >> ~/.aws/credentials
-    - name: Debug AWS Credentials
-      run: |
-        aws sts get-caller-identity --profile prod-account || echo "Failed to get caller identity"
-        aws sts get-caller-identity --profile test-account || echo "Failed to get caller identity"
-        aws configure list
-        echo "Environment variables:"
-        env | grep AWS_
-    - name: Debug Directory Contents
-      run: |
-        ls -la
-        if [ -f function.zip ]; then echo "function.zip exists"; else echo "function.zip missing"; fi
     - name: Install Terraform
       uses: hashicorp/setup-terraform@v3
       with:
