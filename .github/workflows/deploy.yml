@@ -30,18 +30,12 @@ jobs:
         terraform_version: 1.9.0
     - name: Terraform Init
       run: terraform init -reconfigure
-      env:
-        AWS_PROFILE: prod-account
     - name: Terraform Plan
       id: plan
       run: terraform plan -detailed-exitcode
-      env:
-        AWS_PROFILE: prod-account
     - name: Terraform Apply
       if: steps.plan.outputs.exitcode == 2
       run: terraform apply -auto-approve
-      env:
-        AWS_PROFILE: prod-account
     - name: Upload static files to S3
       run: |
         aws s3 cp cloudresume.html s3://trison-cloud-resume-prod-mjcsikwf/cloudresume.html --profile prod-account
