@@ -73,17 +73,19 @@
             <h2 class="section-title">Achievements</h2>
             <ul class="list-disc list-inside">
                 <li>Completed the Cloud Resume Challenge (CRC), building <strong>this</strong> serverless web
-                    application on AWS,
-                    integrating S3, CloudFront, API Gateway, Lambda, DynamoDB, and Route 53, with automated deployments
-                    via GitHub Actions.</li>
-                <li>Implemented secure multi-account management using AWS SSO and CLI, managing separate production
-                    and test accounts, adopting professional cloud practices during
-                    the CRC.</li>
-                <li>Automated infrastructure deployment with Terraform, defining resources like S3 buckets, CloudFront
-                    distributions, and API Gateway, ensuring repeatable and secure deployments during the CRC.</li>
-                <li>Troubleshot and optimized CI/CD pipelines with GitHub Actions, automating S3 uploads and CloudFront
-                    invalidations, resolving deployment issues to ensure consistent updates for this resume website.
-                </li>
+                    application on AWS, integrating S3, CloudFront, API Gateway, Lambda, DynamoDB, and Route 53, with
+                    automated deployments via GitHub Actions and Terraform infrastructure-as-code.</li>
+                <li>Implemented the <i>Spoof Troop</i> security mod, securing DNS for this website using Route 53 with
+                    DNSSEC and KMS key signing, protecting against DNS spoofing attacks.</li>
+                <li>Applied the <i>Check Your Privilege</i> security mod, enforcing least privilege for Lambda
+                    functions and API Gateway roles across production and test accounts, restricting DynamoDB and
+                    CloudWatch access to minimize unauthorized actions.</li>
+                <li>Deployed the <i>Wall of Fire</i> security mod, integrating a Web Application Firewall
+                    (WAF) with AWS-managed rules to protect the CloudFront distribution, mitigating common web attacks
+                    like SQL injection and XSS.</li>
+                <li>Completed the <i>Chain Reaction</i> security mod, hardening the CI/CD pipeline with GitHub
+                    Actions by limiting repository permissions, removing sensitive debug outputs, and scoping IAM
+                    permissions for S3, CloudFront, and Terraform operations, reducing supply chain attack risks.</li>
                 <li>Contributed to securing Democratic Senate seats in 2022 (Fetterman) and 2024 (Gallego) through
                     impactful ad campaigns, leveraging strategic communication and video production.</li>
                 <li>Earned multiple AAPC Pollie Awards, including Best Digital Campaign, Best Use of Opposition
