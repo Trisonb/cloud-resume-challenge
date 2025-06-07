@@ -1,4 +1,4 @@
-# Updated CI/CD for Cloud Resume Challenge - May 31, 2025
+# Updated CI/CD for Cloud Resume Challenge - June 7, 2025
 
 data "aws_caller_identity" "current" {}
 
@@ -115,6 +115,7 @@ resource "aws_cloudfront_distribution" "website_cdn_prod" {
     ssl_support_method       = "sni-only"
     minimum_protocol_version = "TLSv1.2_2021"
   }
+  web_acl_id = "arn:aws:wafv2:us-east-1:442426863782:global/webacl/VisitorCountWAF/d5f2d9c6-ef2c-4331-8ebe-17fc87e10f42"
 }
 
 # DynamoDB Table for Visitor Count (Test Account)
