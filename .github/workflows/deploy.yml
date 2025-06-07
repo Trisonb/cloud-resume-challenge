@@ -18,7 +18,7 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-    - name: Configure AWS Credentials (Prod)
+    - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v4
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -38,9 +38,9 @@ jobs:
       run: terraform apply -auto-approve
     - name: Upload static files to S3
       run: |
-        aws s3 cp cloudresume.html s3://trison-cloud-resume-prod-mjcsikwf/cloudresume.html --profile prod-account
-        aws s3 cp cloudresume.js s3://trison-cloud-resume-prod-mjcsikwf/cloudresume.js --profile prod-account
-        aws s3 cp cloudresume.css s3://trison-cloud-resume-prod-mjcsikwf/cloudresume.css --profile prod-account
+        aws s3 cp cloudresume.html s3://trison-cloud-resume-prod-mjcsikwf/cloudresume.html
+        aws s3 cp cloudresume.js s3://trison-cloud-resume-prod-mjcsikwf/cloudresume.js
+        aws s3 cp cloudresume.css s3://trison-cloud-resume-prod-mjcsikwf/cloudresume.css
     - name: Create CloudFront Invalidation
       run: |
-        aws cloudfront create-invalidation --distribution-id E3V232V07RULP0 --paths "/*" --profile prod-account
+        aws cloudfront create-invalidation --distribution-id E3V232V07RULP0 --paths "/*"
