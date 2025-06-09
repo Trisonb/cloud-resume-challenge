@@ -22,16 +22,30 @@
                 <a href="https://www.linkedin.com/in/trison-braithwaite-80a243141/"
                     class="text-blue-600 hover:underline">LinkedIn</a>
                 <span>|</span>
-                <a href="/blog.html" class="text-blue-600 hover:underline">My Blog Post</a>
+                <a href="/blog.html" class="text-blue-600 hover:underline">Blog</a>
+                <span>|</span>
+                <a href="https://github.com/Trisonb/cloud-resume-challenge"
+                    class="text-blue-600 hover:underline">GitHub</a>
             </p>
         </header>
 
         <!-- Objective -->
         <section class="mb-6">
             <h2 class="section-title">Objective</h2>
-            <p>Dynamic professional with expertise in cloud computing, AWS technologies, and strategic communication,
-                seeking a cloud security role to apply proficiency in cloud tools and hands-on project experience to
-                enhance organizational security and drive innovation.</p>
+            <p>Motivated professional with expertise in AWS cloud security, Terraform, and CI/CD automation, seeking a
+                Junior Cloud Security Engineer role to design and implement secure cloud solutions, leveraging hands-on
+                experience from the Cloud Resume Challenge to enhance organizational resilience.</p>
+        </section>
+
+        <!-- Certifications -->
+        <section class="mb-6">
+            <h2 class="section-title">Certifications</h2>
+            <ul class="list-disc list-inside">
+                <li>AWS Certified Cloud Practitioner <span class="dates">2025</span></li>
+                <li>AWS Certified Solutions Architect – Associate (In Progress) <span class="dates">Expected 2025</span>
+                </li>
+                <li>Pursuing AWS Certified Security – Specialty <span class="dates">Expected 2026</span></li>
+            </ul>
         </section>
 
         <!-- Education -->
@@ -44,23 +58,16 @@
             </div>
         </section>
 
-        <!-- Certifications -->
-        <section class="mb-6">
-            <h2 class="section-title">Certifications</h2>
-            <ul class="list-disc list-inside">
-                <li>AWS Certified Cloud Practitioner <span class="dates">2025</span></li>
-            </ul>
-        </section>
-
         <!-- Skills -->
         <section class="mb-6">
             <h2 class="section-title">Skills</h2>
             <ul class="list-disc list-inside">
-                <li><strong>Cloud Computing & Security</strong>: Proficient in AWS S3, Lambda, API Gateway, DynamoDB,
-                    Route 53, CloudFront, ACM, and IAM, with hands-on experience in secure multi-account management,
-                    infrastructure-as-code (Terraform), and CI/CD automation via GitHub Actions, demonstrated through
-                    the <a href="https://cloudresumechallenge.dev/docs/the-challenge/aws/"
-                        class="text-blue-600 hover:underline">Cloud Resume Challenge</a>.</li>
+                <li><strong>Cloud Security & Automation</strong>: Proficient in AWS IAM, WAF, KMS, Route 53, S3,
+                    CloudFront, Lambda, API Gateway, DynamoDB, and ACM, with expertise in implementing least-privilege
+                    policies, WAF rules, and DNSSEC for secure cloud environments.</li>
+                <li><strong>Security Engineering</strong>: Skilled in Terraform for Infrastructure as Code (IaC), GitHub
+                    Actions for CI/CD pipeline automation, and AWS security tools (e.g., GuardDuty, CloudTrail) for
+                    threat mitigation and compliance.</li>
                 <li><strong>Video Production</strong>: Expert in conceptualization, filming, and editing, creating
                     compelling content for large audiences.</li>
                 <li><strong>Strategic Communication</strong>: Skilled in crafting press releases, media advisories, and
@@ -70,30 +77,43 @@
             </ul>
         </section>
 
+        <!-- Projects -->
+        <section class="mb-6">
+            <h2 class="section-title">Projects</h2>
+            <div>
+                <p class="job-title">Cloud Resume Challenge</p>
+                <p class="dates">2025</p>
+                <ul class="list-disc list-inside ml-4">
+                    <li>Designed and deployed a secure serverless website (trisoncloudresume.com) using AWS services,
+                        Terraform, and GitHub Actions. Implemented DNSSEC, WAF, least-privilege IAM, and CI/CD pipeline
+                        hardening, showcasing cloud security engineering skills. Documented process in a technical blog
+                        post (trisoncloudresume.com/blog.html).</li>
+                </ul>
+            </div>
+        </section>
+
         <!-- Achievements -->
         <section class="mb-6">
             <h2 class="section-title">Achievements</h2>
             <ul class="list-disc list-inside">
-                <li>Completed the Cloud Resume Challenge (CRC), building <strong>this</strong> serverless web
-                    application on AWS, integrating S3, CloudFront, API Gateway, Lambda, DynamoDB, and Route 53, with
-                    automated deployments via GitHub Actions and Terraform infrastructure-as-code.</li>
-                <li>Implemented the <i>Spoof Troop</i> security mod, securing DNS for this website using Route 53 with
-                    DNSSEC and KMS key signing, protecting against DNS spoofing attacks.</li>
-                <li>Applied the <i>Check Your Privilege</i> security mod, enforcing least privilege for Lambda
-                    functions and API Gateway roles across production and test accounts, restricting DynamoDB and
-                    CloudWatch access to minimize unauthorized actions.</li>
-                <li>Deployed the <i>Wall of Fire</i> security mod, integrating a Web Application Firewall
-                    (WAF) with AWS-managed rules to protect the CloudFront distribution, mitigating common web attacks
-                    like SQL injection and XSS.</li>
-                <li>Completed the <i>Chain Reaction</i> security mod, hardening the CI/CD pipeline with GitHub
-                    Actions by limiting repository permissions, removing sensitive debug outputs, and scoping IAM
-                    permissions for S3, CloudFront, and Terraform operations, reducing supply chain attack risks.</li>
+                <li>Engineered a serverless web application on AWS for the Cloud Resume Challenge, deploying S3,
+                    CloudFront, Lambda, API Gateway, DynamoDB, and Route 53 with Terraform and automating updates via
+                    GitHub Actions CI/CD.</li>
+                <li>Secured DNS for trisoncloudresume.com by deploying Route 53 with DNSSEC and KMS key signing,
+                    mitigating DNS spoofing risks.</li>
+                <li>Implemented least-privilege IAM policies for Lambda and API Gateway across multi-account AWS
+                    environments, restricting DynamoDB and CloudWatch access to enhance security.</li>
+                <li>Deployed AWS WAF with AWSManagedRulesCommonRuleSet to protect CloudFront distribution, blocking SQL
+                    injection and XSS attacks.</li>
+                <li>Hardened GitHub Actions CI/CD pipeline by automating secure deployments, limiting repository
+                    permissions to contents: read, and scoping IAM roles for S3, CloudFront, and Terraform, reducing
+                    supply chain attack risks.</li>
+                <li>Diagnosed and resolved Terraform state mismatches and IAM permission errors, ensuring reliable
+                    deployment of secure AWS infrastructure.</li>
                 <li>Contributed to securing Democratic Senate seats in 2022 (Fetterman) and 2024 (Gallego) through
                     impactful ad campaigns, leveraging strategic communication and video production.</li>
                 <li>Earned multiple AAPC Pollie Awards, including Best Digital Campaign, Best Use of Opposition
                     Research, Best Viral Campaign, and Best in Show, for innovative political advertisements.</li>
-                <li>Generated millions of organic views and sparked news stories through viral video content,
-                    demonstrating effective audience engagement.</li>
             </ul>
         </section>
 
@@ -105,16 +125,11 @@
                 <p class="company">New Deal Strategies</p>
                 <p class="dates">October 2020 – Present</p>
                 <ul class="list-disc list-inside ml-4">
-                    <li>Led video production, transitioning from writing to head videographer, delivering high-impact
-                        content under tight deadlines.</li>
-                    <li>Played a pivotal role in Ruben Gallego’s 2024 Senate campaign, producing ads that contributed to
-                        winning a Democratic Senate seat in a purple state during a challenging year.</li>
-                    <li>Spearheaded video efforts for the 2022 John Fetterman Senate campaign, producing ads with
-                        millions of organic views and extensive media coverage.</li>
-                    <li>Created award-winning advertisements recognized by AAPC Pollie Awards, including Best Digital
-                        Campaign and Best Viral Campaign.</li>
-                    <li>Built and managed a TikTok account, growing it to over 75,000 followers and achieving more than
-                        5 million likes through strategic content production.</li>
+                    <li>Led video production, delivering high-impact content under tight deadlines for campaigns,
+                        including Ruben Gallego’s 2024 Senate win and John Fetterman’s 2022 Senate campaign, earning
+                        multiple AAPC Pollie Awards.</li>
+                    <li>Built a TikTok account to over 75,000 followers, achieving 5 million likes through strategic
+                        content production.</li>
                 </ul>
             </div>
             <div class="mb-4">
@@ -122,10 +137,7 @@
                 <p class="company">Bolivian Llama Party</p>
                 <p class="dates">August 2019 – November 2019</p>
                 <ul class="list-disc list-inside ml-4">
-                    <li>Conducted cost analysis to optimize operational efficiency, improving financial performance.
-                    </li>
-                    <li>Developed policies to streamline cost analysis, enhancing financial forecasting accuracy.</li>
-                    <li>Monitored variances and identified trends to address challenges and capitalize on opportunities.
+                    <li>Conducted cost analysis to optimize operational efficiency, enhancing financial forecasting.
                     </li>
                 </ul>
             </div>
@@ -134,8 +146,8 @@
                 <p class="company">Bolivian Llama Party</p>
                 <p class="dates">May 2016 – March 2020</p>
                 <ul class="list-disc list-inside ml-4">
-                    <li>Assisted in preparing culinary dishes, ensuring adherence to quality standards.</li>
-                    <li>Managed kitchen tasks to support efficient operations and timely meal preparation.</li>
+                    <li>Supported efficient kitchen operations, ensuring high-quality meal preparation under time
+                        constraints.</li>
                 </ul>
             </div>
         </section>
