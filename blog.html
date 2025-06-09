@@ -12,19 +12,20 @@
     <div class="resume-container bg-gray-100 p-8">
         <header class="text-center mb-8">
             <h1>My Cloud Resume Challenge Journey</h1>
-            <p class="header-contact">By: Trison Braithwaite June 2025</p>
+            <p class="header-contact">By Trison Braithwaite, June 2025</p>
         </header>
         <section class="mb-6">
-            <p>During October of 2024, I embarked on the <a href="https://cloudresumechallenge.dev/"
+            <p>In October 2024, I embarked on the <a href="https://cloudresumechallenge.dev/"
                     class="text-blue-600 hover:underline">Cloud Resume Challenge</a>, a hands-on project that
-                transformed my understanding of cloud computing and security. I have a background in video
-                production and strategic communication but, was eager to pivot into cloud security. It's been a dream of
-                mine for a long time to learn about and eventually work in IT. The challenge, created
-                by Forrest Brazeal, pushed me to build a serverless resume website on AWS, automate its deployment, and
-                implement advanced security measures. The result? A fully functional, secure website at <a
-                    href="https://trisoncloudresume.com" class="text-blue-600 hover:underline">trisoncloudresume.com</a>
-                and a portfolio that showcases my skills in AWS, Terraform, and CI/CD. Here’s a breakdown of my journey,
-                the skills I gained, and the security mods that make this project stand out.</p>
+                transformed my understanding of cloud computing and security. With a background in video production and
+                strategic communication, I was eager to pivot into cloud security. For years, I’ve dreamed of learning
+                and working in IT, particularly in the dynamic field of cloud security. The challenge, created by
+                Forrest Brazeal, pushed me to build a serverless resume website on AWS,
+                automate its deployment, and implement advanced security measures. The result? A fully functional,
+                secure website at <a href="https://trisoncloudresume.com"
+                    class="text-blue-600 hover:underline">trisoncloudresume.com</a> and a portfolio that showcases my
+                skills in AWS, Terraform, and CI/CD. Here’s a breakdown of my journey, the skills I gained, and the
+                security mods that make this project stand out.</p>
         </section>
         <section class="mb-6">
             <h2 class="section-title">The Challenge: Building a Serverless Resume</h2>
@@ -34,12 +35,11 @@
                 deployment, I adopted Terraform, defining resources like S3 buckets, CloudFront distributions, and
                 Lambda functions. For continuous deployment, I set up a GitHub Actions pipeline to upload static files
                 to S3 and invalidate the CloudFront cache whenever I pushed changes to my repository.</p>
-            <p>The core project was a learning jounrey in and of itself. I have some pride in the fact that the project
-                is typically completed by folks who have years of experience in IT and rarely by those, like myself, who
-                have none. That said, something I'm just as proud of, are the four security mods I completed for this
-                website:
-                <i>Spoof Troop</i>, <i>Check Your Privilege</i>, <i>Wall of Fire</i>, and <i>Chain Reaction</i>. These
-                mods elevated my project from a basic website to a secure, production-ready application.
+            <p>The core project was a learning journey in and of itself. I take pride in the fact that the project is
+                typically completed by those with years of IT experience and rarely by someone like me, with none. That
+                said, I’m equally proud of the four security mods I completed for this website: <i>Spoof Troop</i>,
+                <i>Check Your Privilege</i>, <i>Wall of Fire</i>, and <i>Chain Reaction</i>. These mods elevated my
+                project from a basic website to a secure, production-ready application.
             </p>
         </section>
         <section class="mb-6">
@@ -49,7 +49,7 @@
                 DNSSEC with a KMS key for signing, safeguarding <a href="https://trisoncloudresume.com"
                     class="text-blue-600 hover:underline">trisoncloudresume.com</a> against DNS spoofing attacks. This
                 ensured that users visiting my site were directed to the correct CloudFront distribution, not a
-                malicious imposter. Implementing DNSSEC taught me the importance of cryptographic integrity in DNS and
+                malicious impostor. Implementing DNSSEC taught me the importance of cryptographic integrity in DNS and
                 how to manage KMS keys securely.</p>
             <h3>Check Your Privilege: Enforcing Least Privilege</h3>
             <p>The <i>Check Your Privilege</i> mod emphasized the principle of least privilege across my AWS resources.
@@ -59,15 +59,15 @@
                 roles.</p>
             <h3>Wall of Fire: Deploying a Web Application Firewall</h3>
             <p>The <i>Wall of Fire</i> mod added a Web Application Firewall (WAF) to protect my CloudFront distribution.
-                I created a Web ACL named VisitorCountWAF with the
-                AWSManagedRulesCommonRuleSet, blocking common web attacks like SQL injection and XSS.
+                I created a Web ACL named <code>VisitorCountWAF</code> with the
+                <code>AWSManagedRulesCommonRuleSet</code>, blocking common web attacks like SQL injection and XSS.
                 Associating the WAF with my distribution was a challenge due to CLI errors and console visibility
                 issues, but I resolved them by ensuring the global scope and updating IAM permissions. Verifying the
                 WAF’s association solidified my understanding of integrating security layers into cloud applications.
             </p>
             <h3>Chain Reaction: Securing the CI/CD Pipeline</h3>
             <p>The <i>Chain Reaction</i> mod hardened my GitHub Actions pipeline, reducing the risk of supply chain
-                attacks. I limited repository permissions to contents: read, removed sensitive debug
+                attacks. I limited repository permissions to <code>contents: read</code>, removed sensitive debug
                 outputs, and scoped IAM permissions for my deployment user to minimal actions on S3, CloudFront, and
                 Terraform operations. Troubleshooting Terraform permission errors required iterative IAM policy updates,
                 teaching me the nuances of least-privilege automation. The result was a secure, automated pipeline that
@@ -86,10 +86,9 @@
                 <li><strong>Security Principles</strong>: Implementing DNSSEC, least privilege, WAF protection, and
                     pipeline hardening.</li>
             </ul>
-            <p>The project was very challenging, but I am so glad I persisted. I wrestled with IAM permission errors,
+            <p>The project was very challenging, but I’m glad I persisted. I wrestled with IAM permission errors,
                 console visibility issues, and Terraform state mismatches, but each obstacle deepened my understanding
-                of AWS and cloud security.
-                My resume now lives at <a href="https://trisoncloudresume.com"
+                of AWS and cloud security. My resume now lives at <a href="https://trisoncloudresume.com"
                     class="text-blue-600 hover:underline">trisoncloudresume.com</a>, a testament to my ability to build
                 and secure a serverless application.</p>
         </section>
