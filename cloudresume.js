@@ -41,12 +41,10 @@ async function incrementVisitorCount(retryCount = 0, maxRetries = 3) {
     }
 }
 
-window.onload = function () {
-    console.log('window.onload triggered');
-    incrementVisitorCount();
-};
-
 document.addEventListener('DOMContentLoaded', function () {
+    console.log('DOMContentLoaded triggered');
+    incrementVisitorCount();
+
     // Get the matrix-rain container
     const matrixRain = document.getElementById('matrix-rain');
 
@@ -103,6 +101,4 @@ document.addEventListener('DOMContentLoaded', function () {
     charElements.forEach(charElement => {
         changeCharacter(charElement);
     });
-
-    // Existing visitor counter code (if any) can go here
 });
