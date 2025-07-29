@@ -5,11 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trison's Cloud Resume</title>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="cloudresume.css">
 </head>
 
 <body>
-    <div id="visitor-count"></div>
+    <div id="visitor-count" style="margin-bottom: 2rem;"></div>
+    <div class="matrix-rain" id="matrix-rain"></div>
     <div class="resume-container bg-gray-100 p-8">
         <!-- Header -->
         <header class="text-center mb-8">
@@ -87,11 +89,13 @@
                 <p class="job-title">Cloud Resume Challenge</p>
                 <p class="dates">2025</p>
                 <ul class="list-disc list-inside ml-4">
-                    <li>Designed and deployed <strong>this</strong> secure serverless website using AWS services,
-                        Terraform, and GitHub Actions. Implemented DNSSEC, WAF, least-privilege IAM, and CI/CD pipeline
-                        hardening, showcasing cloud security engineering skills. Documented the process in a
-                        <a href="/blog.html" class="text-blue-600 hover:underline">technical blog post</a>.
-                    </li>
+                    <li>Designed and deployed a secure serverless website using AWS services, Terraform, and GitHub
+                        Actions. Implemented DNSSEC, WAF, least-privilege IAM, and CI/CD pipeline hardening, showcasing
+                        cloud security engineering skills. Documented the process in a <a href="/blog.html"
+                            class="text-blue-600 hover:underline">technical blog post</a>.</li>
+                    <li>Developed a real-time visitor counter using AWS Lambda for backend logic, DynamoDB for storing
+                        visit counts, and API Gateway with CORS enabled for secure cross-origin JavaScript requests,
+                        enabling dynamic updates to the webpage.</li>
                 </ul>
             </div>
         </section>
@@ -100,11 +104,13 @@
         <section class="mb-6">
             <h2 class="section-title">Achievements</h2>
             <ul class="list-disc list-inside">
-                <li>Engineered this serverless web application on AWS for the Cloud Resume Challenge, deploying S3,
-                    CloudFront, Lambda, API Gateway, DynamoDB, and Route 53 with Terraform and automating updates via
-                    GitHub Actions CI/CD.</li>
-                <li>Secured DNS for this website by deploying Route 53 with DNSSEC and KMS key signing,
-                    mitigating DNS spoofing risks.</li>
+                <li>Engineered a serverless web application for the Cloud Resume Challenge, deploying S3, CloudFront,
+                    Lambda, API Gateway, DynamoDB, and Route 53 with Terraform, and automating updates via GitHub
+                    Actions CI/CD.</li>
+                <li>Integrated a visitor counter using AWS Lambda, DynamoDB, and API Gateway with CORS, enabling
+                    real-time tracking for each time the page is visited on a serverless architecture.</li>
+                <li>Secured DNS for the website with Route 53, DNSSEC, and KMS key signing, mitigating DNS spoofing
+                    risks.</li>
                 <li>Implemented least-privilege IAM policies for Lambda and API Gateway across multi-account AWS
                     environments, restricting DynamoDB and CloudWatch access to enhance security.</li>
                 <li>Deployed AWS WAF with AWSManagedRulesCommonRuleSet to protect CloudFront distribution, blocking SQL
