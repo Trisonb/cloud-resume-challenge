@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const matrixRain = document.getElementById('matrix-rain');
 
     // Define the character set for the Matrix effect (letters, numbers, symbols)
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?~`';
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?~`§¶∆∑Ωµπ';
 
     // Create 24 columns with 18 characters each
     for (let i = 0; i < 24; i++) {
