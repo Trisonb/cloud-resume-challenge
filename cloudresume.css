@@ -2,9 +2,9 @@ body {
     font-family: 'VT323', 'Courier New', monospace;
     /* Retro matrix font, with fallbacks */
     font-size: 16pt;
-    /* Increased for readability */
+    /* Increased from 14pt for better readability */
     line-height: 1.5;
-    /* Adjusted to accommodate larger text */
+    /* Adjusted from 1.4 to accommodate larger text */
     color: #00FF00;
     /* Classic matrix green */
     background-color: #000000;
@@ -81,7 +81,7 @@ body::before {
 
 .section-title {
     font-size: 17pt;
-    /* Increased for readability */
+    /* Increased from 15pt */
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -116,7 +116,7 @@ body::before {
 .job-title {
     font-weight: bold;
     font-size: 15pt;
-    /* Increased for readability */
+    /* Increased from 13pt */
     font-family: 'VT323', 'Courier New', monospace !important;
     /* Explicit font */
 }
@@ -126,7 +126,7 @@ body::before {
     color: #00FF00;
     /* Green for consistency */
     font-size: 15pt;
-    /* Increased for readability */
+    /* Increased from 13pt */
     font-family: 'VT323', 'Courier New', monospace !important;
     /* Explicit font */
 }
@@ -134,14 +134,14 @@ body::before {
 .company {
     font-style: italic;
     font-size: 15pt;
-    /* Increased for readability */
+    /* Increased from 13pt */
     font-family: 'VT323', 'Courier New', monospace !important;
     /* Explicit font */
 }
 
 h1 {
     font-size: 28pt;
-    /* Increased for readability */
+    /* Increased from 26pt */
     font-weight: bold;
     text-transform: uppercase;
     margin-bottom: 0.05in;
@@ -156,7 +156,7 @@ h1 {
 @media screen and (max-width: 768px) {
     h1 {
         font-size: 24pt;
-        /* Increased for readability */
+        /* Increased from 22pt */
     }
 }
 
@@ -172,7 +172,7 @@ h1 {
 
 .header-contact {
     font-size: 15pt;
-    /* Increased for readability */
+    /* Increased from 13pt */
     margin-bottom: 0.3in;
     font-family: 'VT323', 'Courier New', monospace !important;
     /* Explicit font */
@@ -181,7 +181,7 @@ h1 {
 @media screen and (max-width: 768px) {
     .header-contact {
         font-size: 14pt;
-        /* Increased for readability */
+        /* Increased from 12pt */
     }
 }
 
@@ -275,13 +275,13 @@ a:hover {
 
 .text-3xl {
     font-size: 2.5rem;
-    /* Increased for readability */
+    /* Increased from 2.25rem */
 }
 
 @media screen and (max-width: 768px) {
     .text-3xl {
         font-size: 2rem;
-        /* Increased for readability */
+        /* Increased from 1.75rem */
     }
 }
 
@@ -317,12 +317,12 @@ a:hover {
 /* Matrix rain effect with random characters */
 .matrix-rain {
     position: fixed;
-    top: 3rem;
-    /* Increased from 2rem to clear visitor count */
+    top: 2rem;
+    /* Offset to clear visitor count */
     left: 0;
     width: 100%;
-    height: calc(100% - 3rem);
-    /* Adjusted height for offset */
+    height: calc(100% - 2rem);
+    /* Adjust height for offset */
     pointer-events: none;
     z-index: -1;
     display: flex;
@@ -355,7 +355,7 @@ a:hover {
     width: 1.5em;
     /* Narrower columns to prevent overlap */
     font-size: 30pt;
-    /* Increased for readability */
+    /* Increased from 28pt */
     white-space: nowrap;
     animation: fall linear infinite;
     /* Falling animation */
@@ -376,7 +376,7 @@ a:hover {
         width: 1.2em;
         /* Slightly narrower for mobile */
         font-size: 26pt;
-        /* Increased for readability */
+        /* Increased from 24pt */
     }
 }
 
@@ -409,8 +409,8 @@ a:hover {
 
 /* Visitor counter styles */
 .visitor-count {
-    font-size: 16pt;
-    /* Reduced from 18pt to match body */
+    font-size: 18pt;
+    /* Increased from 16pt */
     font-weight: bold;
     color: #00FF00;
     text-align: center;
@@ -420,12 +420,4 @@ a:hover {
     position: relative;
     font-family: 'VT323', 'Courier New', monospace !important;
     /* Explicit font */
-    margin: 0 0 1rem 0;
-    /* Moved from inline to CSS */
-
-    @media screen and (max-width: 768px) {
-        .visitor-count {
-            font-size: 14pt;
-            /* Smaller for mobile to fit on one line */
-        }
-    }
+}
