@@ -60,15 +60,15 @@
                 roles.</p>
             <h3>Wall of Fire: Deploying a Web Application Firewall</h3>
             <p>The <i>Wall of Fire</i> mod added a Web Application Firewall (WAF) to protect my CloudFront distribution.
-                I created a Web ACL named <code>VisitorCountWAF</code> with the
-                <code>AWSManagedRulesCommonRuleSet</code>, blocking common web attacks like SQL injection and XSS.
+                I created a Web ACL named VisitorCountWAF with the
+                AWSManagedRulesCommonRuleSet, blocking common web attacks like SQL injection and XSS.
                 Associating the WAF with my distribution was a challenge due to CLI errors and console visibility
                 issues, but I resolved them by ensuring the global scope and updating IAM permissions. Verifying the
                 WAF’s association solidified my understanding of integrating security layers into cloud applications.
             </p>
             <h3>Chain Reaction: Securing the CI/CD Pipeline</h3>
             <p>The <i>Chain Reaction</i> mod hardened my GitHub Actions pipeline, reducing the risk of supply chain
-                attacks. I limited repository permissions to <code>contents: read</code>, removed sensitive debug
+                attacks. I limited repository permissions to contents: read, removed sensitive debug
                 outputs, and scoped IAM permissions for my deployment user to minimal actions on S3, CloudFront, and
                 Terraform operations. Troubleshooting Terraform permission errors required iterative IAM policy updates,
                 teaching me the nuances of least-privilege automation. The result was a secure, automated pipeline that
