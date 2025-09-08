@@ -1,4 +1,4 @@
-yaml
+```yaml
 name: Deploy to AWS
 on:
   push:
