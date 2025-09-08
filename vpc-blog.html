@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building a Secure AWS VPC - Trison's Cloud Blog</title>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="cloudresume.css">
+</head>
+
+<body>
+    <div class="matrix-rain" id="matrix-rain" style="top: 2rem;"></div>
+    <div class="resume-container bg-gray-100 p-8">
+        <header class="text-center mb-8">
+            <h1>Building a Secure AWS VPC</h1>
+            <p class="header-contact">By Trison Braithwaite, September 2025</p>
+            <p class="header-contact">
+                <a href="/blog.html" class="text-blue-600 hover:underline">Back to Blog</a>
+                <span>|</span>
+                <a href="/cloudresume.html" class="text-blue-600 hover:underline">Resume</a>
+            </p>
+        </header>
+        <section class="mb-6">
+            <p>In September 2025, I took my <a href="https://cloudresumechallenge.dev/"
+                    class="text-blue-600 hover:underline">Cloud Resume Challenge</a> to the next level by building a
+                secure AWS VPC for my Cloud Security Portfolio at <a href="https://trisoncloudresume.com"
+                    class="text-blue-600 hover:underline">trisoncloudresume.com</a>. This project pushed me to design a
+                robust network architecture using Terraform, enabling private EC2 instances to securely access the
+                internet via a NAT instance and monitoring the setup with AWS Security Hub. From battling NAT
+                connectivity issues to untangling IAM permission errors, this journey deepened my cloud security
+                expertise. Here’s how I did it, the challenges I faced, and what it means for my portfolio.</p>
+        </section>
+        <section class="mb-6">
+            <h2 class="section-title">The Challenge: Crafting a Secure Network</h2>
+            <p>The Secure AWS VPC project tasked me with building a VPC in us-east-1 (10.0.0.0/16) with a public subnet
+                (10.0.1.0/24) hosting a NAT instance and a private subnet (10.0.2.0/24) with an EC2 instance accessing
+                the internet via the NAT. I used Terraform to define the VPC, subnets, route tables, security groups,
+                NACLs, and a t2.micro NAT instance. I also integrated AWS Security Hub to monitor compliance with CIS
+                AWS Foundations Benchmarks. This wasn’t just about setting up a network—it was about proving I could
+                secure and troubleshoot complex cloud infrastructure.</p>
+        </section>
+        <section class="mb-6">
+            <h2 class="section-title">Overcoming Challenges</h2>
+            <h3>NAT Connectivity Struggles</h3>
+            <p>Getting the private EC2 to connect to the internet was the toughest hurdle—initially, commands like
+                ping 8.8.8.8 and curl google.com failed. I tackled this with a systematic
+                approach:</p>
+            <ul class="list-disc list-inside">
+                <li>Verified the NAT instance’s source/destination check was disabled using
+                    aws ec2 describe-instance-attribute, ensuring it could forward traffic.</li>
+                <li>Checked the private route table targeted the NAT’s ENI (eni-036f8add8566a3b4f) with
+                    aws ec2 describe-route-tables, correcting an outdated route.</li>
+                <li>Inspected the NAT instance’s OS via SSH, confirming net.ipv4.ip_forward=1 and updating
+                    the iptables MASQUERADE rule to restrict to 10.0.2.0/24 for security.</li>
+                <li>Ensured security groups and NACLs allowed outbound traffic and ephemeral ports (1024-65535) for
+                    return traffic, using least-privilege principles.</li>
+            </ul>
+            <p>These steps, executed via AWS CLI and codified in Terraform, restored connectivity, proving my ability to
+                troubleshoot network issues.</p>
+            <h3>IAM Permission Battles</h3>
+            <p>Enabling VPC Flow Logs and Security Hub brought a barrage of IAM permission errors for my
+                <i>GitHubActionsUser</i>. Key issues included:
+            </p>
+            <ul class="list-disc list-inside">
+                <li>Missing permissions like iam:CreateRole, iam:CreatePolicy,
+                    logs:DeleteLogGroup, and securityhub:EnableSecurityHub, requiring multiple
+                    AWS Console updates.</li>
+                <li>Terraform state conflicts with Flow Logs, resolved by removing those resources after confirming
+                    connectivity.</li>
+                <li>Security Hub enablement issues, fixed by adding iam:CreateServiceLinkedRole and other
+                    permissions iteratively.</li>
+            </ul>
+            <p>These struggles taught me the critical role of precise IAM policies and persistent debugging in cloud
+                security.</p>
+        </section>
+        <section class="mb-6">
+            <h2 class="section-title">Why It Matters</h2>
+            <p>While my resume website at <a href="https://trisoncloudresume.com"
+                    class="text-blue-600 hover:underline">trisoncloudresume.com</a> runs on S3 and CloudFront, this VPC
+                project showcases my ability to build secure backend networks. It’s a cornerstone of my portfolio,
+                highlighting:</p>
+            <ul class="list-disc list-inside">
+                <li><strong>Network Security</strong>: Configuring VPCs, NAT instances, security groups, and NACLs with
+                    least-privilege access.</li>
+                <li><strong>Troubleshooting</strong>: Using AWS CLI and Terraform to diagnose connectivity and
+                    permission issues.</li>
+                <li><strong>Security Monitoring</strong>: Enabling Security Hub for compliance and threat detection.
+                </li>
+                <li><strong>Infrastructure-as-Code</strong>: Managing AWS resources with Terraform for reproducibility.
+                </li>
+            </ul>
+            <p>This project demonstrates I can tackle real-world cloud security challenges, strengthening my candidacy
+                for Junior Cloud Security Engineer roles.</p>
+        </section>
+        <section class="mb-6">
+            <h2 class="section-title">What’s Next?</h2>
+            <p>The Secure AWS VPC project has ignited my passion for cloud security. I’m now studying for the AWS
+                Certified Solutions Architect – Associate and AWS Certified Security – Specialty certifications to
+                deepen my expertise. Future projects may include integrating GuardDuty for advanced threat detection or
+                exploring serverless security patterns. Check out my code in the <a
+                    href="https://github.com/Trisonb/cloud-resume-challenge"
+                    class="text-blue-600 hover:underline">GitHub repository</a> and follow my journey on <a
+                    href="/blog.html" class="text-blue-600 hover:underline">my blog</a>!</p>
+        </section>
+    </div>
+    <script src="cloudresume.js"></script>
+</body>
+
+</html>

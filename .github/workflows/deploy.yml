@@ -1,3 +1,4 @@
+```yaml
 name: Deploy to AWS
 on:
   push:
@@ -9,6 +10,8 @@ on:
       - 'cloudresume.js'
       - 'cloudresume.css'
       - 'blog.html'
+      - 'cloud-resume-blog.html'
+      - 'vpc-blog.html'
       - 'function.zip'
       - '.github/workflows/deploy.yml'
 permissions:
@@ -58,6 +61,9 @@ jobs:
         aws s3 cp cloudresume.js s3://trison-cloud-resume-prod-mjcsikwf/cloudresume.js --profile prod-account
         aws s3 cp cloudresume.css s3://trison-cloud-resume-prod-mjcsikwf/cloudresume.css --profile prod-account
         aws s3 cp blog.html s3://trison-cloud-resume-prod-mjcsikwf/blog.html --profile prod-account
+        aws s3 cp cloud-resume-blog.html s3://trison-cloud-resume-prod-mjcsikwf/cloud-resume-blog.html --profile prod-account
+        aws s3 cp vpc-blog.html s3://trison-cloud-resume-prod-mjcsikwf/vpc-blog.html --profile prod-account
     - name: Create CloudFront Invalidation
       run: |
-        aws cloudfront create-invalidation --distribution-id E3V232V07RULP0 --paths "/*" --profile prod-account
+        aws cloudfront create-invalidation --distribution-id E3V232V07RULP0 --paths "/cloudresume.html" "/blog.html" "/cloud-resume-blog.html" "/vpc-blog.html" --profile prod-account
+```
