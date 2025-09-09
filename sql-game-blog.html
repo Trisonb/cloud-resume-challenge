@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building an SQL Injection Game - Trison's Cloud Blog</title>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="cloudresume.css">
+</head>
+
+<body>
+    <div class="matrix-rain" id="matrix-rain" style="top: 2rem;"></div>
+    <div class="resume-container bg-gray-100 p-8">
+        <header class="text-center mb-8">
+            <h1>Building an SQL Injection Game</h1>
+            <p class="dates">September 2025</p>
+            <p class="header-contact">
+                <a href="/cloudresume.html" class="text-blue-600 hover:underline">Back to Resume</a>
+                <span>|</span>
+                <a href="/blog.html" class="text-blue-600 hover:underline">Back to Blog</a>
+                <span>|</span>
+                <a href="https://github.com/Trisonb/cloud-resume-challenge"
+                    class="text-blue-600 hover:underline">GitHub</a>
+            </p>
+        </header>
+        <section class="mb-6">
+            <h2 class="section-title">Overview</h2>
+            <p>As part of expanding my cloud resume portfolio, I wanted a quick, fun project to demonstrate security
+                awareness without adding backend complexity. The result: an SQL Injection Game! It's a simple chat box
+                where users try SQL injection attempts (e.g., "DROP TABLE users;"), and a bot detects them with regex,
+                roasts the user snarkily (with emojis for extra fun), and logs attempts to the console. Everything runs
+                client-side on my static S3-hosted site—no real database, just string matching for common attacks. Time
+                spent: about 20 minutes, as planned.</p>
+        </section>
+        <section class="mb-6">
+            <h2 class="section-title">What I Built</h2>
+            <ul class="list-disc list-inside ml-4">
+                <li>HTML structure: A chat container with input, submit button, and scrollable message area, integrated
+                    as a separate page (/sql-game.html) linked from the "Projects" section.</li>
+                <li>JavaScript logic: Regex patterns to detect attacks like DROP, SELECT *, UNION, etc. The bot responds
+                    with tailored roasts (e.g., "Whoa, trying to DROP TABLE? That's so 90s! 😂😜") or a default nudge
+                    for non-malicious input.</li>
+                <li>Logging: Timestamped console logs for each attempt (e.g., "[2025-09-08T13:59:00.000Z] User input:
+                    DROP TABLE users;").</li>
+                <li>Styling: Matches the site's retro matrix theme using VT323 font, green text, and black backgrounds.
+                </li>
+            </ul>
+            <p>Deployment: Added files to GitHub Actions for S3 upload and CloudFront invalidation—no Terraform changes
+                needed.</p>
+        </section>
+        <section class="mb-6">
+            <h2 class="section-title">What I Learned</h2>
+            <ul class="list-disc list-inside ml-4">
+                <li>Regex mastery: Crafting patterns for SQL injections (e.g., /(drop\s+(table|database))/i) taught me
+                    efficient string matching without overcomplicating for false positives.</li>
+                <li>Frontend interactivity: DOM manipulation for dynamic chat updates and scrolling enhanced my JS
+                    skills for static sites.</li>
+                <li>Security simulation: It reinforced why parameterized queries matter in real apps, even in a fun
+                    demo.</li>
+                <li>Integration: Keeping it lightweight ensured seamless fit with S3/CloudFront, aligning with
+                    serverless principles.</li>
+            </ul>
+        </section>
+        <section class="mb-6">
+            <h2 class="section-title">Hiccups and Troubleshooting</h2>
+            <p>Minimal issues since it was frontend-only:
+            <ul class="list-disc list-inside ml-4">
+                <li>Styling alignment: Tweaked CSS to match the matrix theme—ensuring the chat box didn't clash with the
+                    rain effect.</li>
+                <li>Regex tuning: Initially, simple patterns missed variations (e.g., case-insensitivity), so added /i
+                    flags and tested common attacks locally.</li>
+                <li>Emojis: Added them for fun, but confirmed they rendered consistently across browsers.</li>
+            </ul>
+            </p>
+            <p>No major deployment snags, but as always, double-checked YAML indentation in deploy.yml (use spaces!),
+                GitHub Secrets for AWS keys, and IAM permissions (e.g., s3:PutObject, cloudfront:CreateInvalidation) to
+                prevent past errors like failed uploads.</p>
+        </section>
+        <section class="mb-6">
+            <h2 class="section-title">Why It's Cool for a Cloud Resume</h2>
+            <p>This project adds a playful, interactive element to my portfolio, showcasing quick prototyping and
+                security concepts without heavy lifting. It highlights my ability to build engaging frontend features on
+                a static site, ties into cloud security (simulating SQLi defense), and demonstrates CI/CD integration
+                via GitHub Actions. Plus, it's a conversation starter for interviews—proving I can blend humor with tech
+                skills!</p>
+        </section>
+    </div>
+    <script src="cloudresume.js"></script>
+</body>
+
+</html>

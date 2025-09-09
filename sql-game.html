@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQL Injection Game - Trison's Cloud Resume</title>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="cloudresume.css">
+</head>
+
+<body>
+    <div class="matrix-rain" id="matrix-rain" style="top: 2rem;"></div>
+    <div class="resume-container bg-gray-100 p-8">
+        <header class="text-center mb-8">
+            <h1>SQL Injection Game</h1>
+            <p class="header-contact">
+                <a href="/cloudresume.html" class="text-blue-600 hover:underline">Back to Resume</a>
+                <span>|</span>
+                <a href="/blog.html" class="text-blue-600 hover:underline">Blog</a>
+                <span>|</span>
+                <a href="https://github.com/Trisonb/cloud-resume-challenge"
+                    class="text-blue-600 hover:underline">GitHub</a>
+            </p>
+        </header>
+        <section class="mb-6">
+            <h2 class="section-title">Try to Hack Me!</h2>
+            <p>Enter a SQL injection attempt below. Can you outsmart the bot? (Spoiler: You won't.)</p>
+            <div class="chat-container">
+                <div class="chat-box" id="chatBox"></div>
+                <input type="text" id="userInput" placeholder="Try a SQL injection..."
+                    class="bg-black text-green-500 p-2">
+                <button onclick="handleInput()" class="bg-green-500 text-black p-2 hover:bg-green-400">Submit</button>
+            </div>
+        </section>
+    </div>
+    <script src="cloudresume.js"></script>
+    <script src="sql-game.js"></script>
+</body>
+
+</html>
