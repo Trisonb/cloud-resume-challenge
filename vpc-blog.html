@@ -28,8 +28,9 @@
                     class="text-blue-600 hover:underline">trisoncloudresume.com</a>. This project pushed me to design a
                 robust network architecture using Terraform, enabling private EC2 instances to securely access the
                 internet via a NAT instance and monitoring the setup with AWS Security Hub. From battling NAT
-                connectivity issues to untangling IAM permission errors, this journey deepened my cloud security
-                expertise. Here’s how I did it, the challenges I faced, and what it means for my portfolio.</p>
+                connectivity issues to untangling IAM permission errors and fixing a CI/CD pipeline issue, this journey
+                deepened my cloud security expertise. Here’s how I did it, the challenges I faced, and what it means for
+                my portfolio.</p>
         </section>
         <section class="mb-6">
             <h2 class="section-title">The Challenge: Crafting a Secure Network</h2>
@@ -73,6 +74,23 @@
             </ul>
             <p>These struggles taught me the critical role of precise IAM policies and persistent debugging in cloud
                 security.</p>
+            <h3>CI/CD Pipeline Syntax Error</h3>
+            <p>Deploying updates to <a href="https://trisoncloudresume.com"
+                    class="text-blue-600 hover:underline">trisoncloudresume.com</a> hit a snag when my GitHub Actions
+                pipeline failed due to a YAML syntax error in deploy.yml. This was my first time creating
+                an index page (blog.html) to link all blog posts and writing this VPC blog, so automating
+                deployments was critical. The issue stemmed from extra code block markers (nested ```yaml)
+                in the workflow file, causing GitHub Actions to reject it. I resolved this by:</p>
+            <ul class="list-disc list-inside">
+                <li>Comparing the broken deploy.yml with a previous working version from my <a
+                        href="https://github.com/Trisonb/cloud-resume-challenge"
+                        class="text-blue-600 hover:underline">GitHub repository</a>.</li>
+                <li>Removing the invalid nested markers to restore proper YAML syntax.</li>
+                <li>Testing the pipeline to confirm automated uploads to my S3 bucket and CloudFront cache invalidation.
+                </li>
+            </ul>
+            <p>This fix ensured seamless updates to my portfolio, highlighting my ability to troubleshoot CI/CD
+                pipelines and maintain secure, automated deployments.</p>
         </section>
         <section class="mb-6">
             <h2 class="section-title">Why It Matters</h2>
@@ -83,12 +101,14 @@
             <ul class="list-disc list-inside">
                 <li><strong>Network Security</strong>: Configuring VPCs, NAT instances, security groups, and NACLs with
                     least-privilege access.</li>
-                <li><strong>Troubleshooting</strong>: Using AWS CLI and Terraform to diagnose connectivity and
-                    permission issues.</li>
+                <li><strong>Troubleshooting</strong>: Using AWS CLI, Terraform, and GitHub Actions to diagnose
+                    connectivity, permission, and pipeline issues.</li>
                 <li><strong>Security Monitoring</strong>: Enabling Security Hub for compliance and threat detection.
                 </li>
                 <li><strong>Infrastructure-as-Code</strong>: Managing AWS resources with Terraform for reproducibility.
                 </li>
+                <li><strong>Automation</strong>: Implementing a CI/CD pipeline with GitHub Actions for secure, automated
+                    deployments.</li>
             </ul>
             <p>This project demonstrates I can tackle real-world cloud security challenges, strengthening my candidacy
                 for Junior Cloud Security Engineer roles.</p>
