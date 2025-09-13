@@ -16,11 +16,11 @@ function handleInput() {
     // Check for SQL injection patterns
     const sqlPatterns = [
         { pattern: /(drop\s+(table|database))/i, roast: "Whoa, trying to DROP TABLE? That's so 90s, even my grandma's database is safe from that! 😂😜" },
-        { pattern: /(select\s+\*)/i, roast: "SELECT *? Really? You think you can sneak that past me? Try harder, script kiddie! 😂😜" },
-        { pattern: /(union\s+(all|select))/i, roast: "UNION attack? Bro, I saw that coming from a mile away. Go back to SQL 101! 😂😜" },
-        { pattern: /(or|and)\s+['"]?1['"]?\s*=\s*['"]?1['"]?/i, roast: "OR '1'='1'? That's the oldest trick in the book! My firewall laughs at you! 😂😜" },
-        { pattern: /(--|\/\*|\*\/)/i, roast: "Comments like -- or /*? You're not even trying to hide it! Step up your game! 😂😜" },
-        { pattern: /(delete|update|insert)\s+/i, roast: "Trying to DELETE, UPDATE, or INSERT? Nice try, but my defenses are tighter than a vault! 😂😜" }
+        { pattern: /(select\s+\*)/i, roast: "SELECT *? Really? You think you can sneak that past me? Try harder 😜" },
+        { pattern: /(union\s+(all|select))/i, roast: "UNION attack? Bro, I saw that coming from a mile away. Go back to SQL 101! 😂" },
+        { pattern: /(or|and)\s+['"]?1['"]?\s*=\s*['"]?1['"]?/i, roast: "OR '1'='1'? That's the oldest trick in the book! My firewall laughs at you! 😂😂" },
+        { pattern: /(--|\/\*|\*\/)/i, roast: "Comments like -- or /*? You're not even trying to hide it! Step up your game! 🥱" },
+        { pattern: /(delete|update|insert)\s+/i, roast: "Trying to DELETE, UPDATE, or INSERT? Nice try, but my defenses are tighter than a vault! 😝" }
     ];
 
     let botResponse = "Bot: Hmm, that doesn't look like a SQL injection 🤨 Try something spicier!";
