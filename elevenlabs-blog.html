@@ -49,7 +49,7 @@
                 <li>An updated README with clear, beginner-friendly steps to deploy and test the demo.</li>
             </ul>
             <p>I tested everything locally with AWS CLI to ensure the voice clip lands in
-                <code>s3://elevenlabs-demo-bucket-&lt;random-suffix&gt;/output.mp3</code>, ready to play!
+                s3://elevenlabs-demo-bucket-&lt;random-suffix&gt;/output.mp3, ready to play!
             </p>
         </section>
         <section class="mb-6">
@@ -70,10 +70,10 @@
             <p>It wasn’t all smooth sailing, but I tackled these bumps:</p>
             <ul class="list-disc list-inside ml-4">
                 <li>Lambda Errors: The Lambda function failed with an “Unhandled” error because it couldn’t access the
-                    S3 bucket. I added the right permissions (<code>s3:PutObject</code>) to the Lambda role and
+                    S3 bucket. I added the right permissions (s3:PutObject) to the Lambda role and
                     retested.</li>
                 <li>Terraform Snags: My first Terraform apply didn’t work due to a mix-up with the setup files. I
-                    restarted with a clean setup and double-checked with <code>terraform plan</code>.</li>
+                    restarted with a clean setup and double-checked with terraform plan.</li>
                 <li>API Key Safety: I initially forgot to set up Secrets Manager properly, so I fixed it to keep the API
                     key secure.</li>
                 <li>Testing Woes: The voice clip didn’t generate at first due to a typo in the Python script. A quick
