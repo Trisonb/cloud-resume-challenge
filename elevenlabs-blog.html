@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contributing to ElevenLabs' AI Audio Demo - Trison's Cloud Blog</title>
+    <title>Contributing to ElevenLabs' AI Voice Demo - Trison's Cloud Blog</title>
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="cloudresume.css">
 </head>
@@ -13,7 +13,7 @@
     <div class="matrix-rain" id="matrix-rain" style="top: 2rem;"></div>
     <div class="resume-container bg-gray-100 p-8">
         <header class="text-center mb-8">
-            <h1>Contributing to ElevenLabs' AI Audio Demo</h1>
+            <h1>Contributing to ElevenLabs' AI Voice Demo</h1>
             <p class="dates">September 2025</p>
             <p class="header-contact">
                 <a href="/cloudresume.html" class="text-blue-600 hover:underline">Back to Resume</a>
@@ -22,76 +22,75 @@
                 <span>|</span>
                 <a href="https://github.com/Trisonb/cloud-resume-challenge"
                     class="text-blue-600 hover:underline">GitHub</a>
-                <span>|</span>
-                <a href="https://trisoncloudresume.com" class="text-blue-600 hover:underline">Portfolio</a>
             </p>
         </header>
         <section class="mb-6">
             <h2 class="section-title">Overview</h2>
-            <p>To stand out for junior cloud security, DevOps, or AI ops roles at ElevenLabs, I contributed to their
-                open-source <a href="https://github.com/elevenlabs/elevenlabs-nextjs-starter"
-                    class="text-blue-600 hover:underline">elevenlabs-nextjs-starter</a> repository. I added a Terraform
-                script to automate the deployment of an AI audio demo on AWS free tier, using Lambda and S3, and
-                enhanced the CI/CD pipeline with GitHub Actions. The pull request reduced demo setup time by about 30%,
-                aligning with my Cloud Resume Challenge experience. This project showcases my AWS, Terraform, and CI/CD
-                skills while demonstrating my interest in AI voice technology.</p>
+            <p>I’m a huge fan of ElevenLabs’ AI voice tech, so I jumped at the chance to contribute to their <a
+                    href="https://github.com/elevenlabs/elevenlabs-nextjs-starter"
+                    class="text-blue-600 hover:underline">open-source project</a>. My goal was to make it easier for
+                anyone to test their AI voice demo on AWS without spending a dime, using skills from my Cloud Resume
+                Challenge. I added a setup that deploys a demo in minutes, complete with a custom “Hey ElevenLabs, I
+                love your software!” voice clip. This project cut setup time by about 30% and shows my pivot from
+                politics to IT, aiming for roles in cloud security, DevOps, or AI ops.</p>
         </section>
         <section class="mb-6">
             <h2 class="section-title">What I Built</h2>
+            <p>I contributed a pull request to the <a
+                    href="https://github.com/elevenlabs/elevenlabs-nextjs-starter/pull/4"
+                    class="text-blue-600 hover:underline">elevenlabs-nextjs-starter</a> repo with:</p>
             <ul class="list-disc list-inside ml-4">
-                <li>Terraform Script: Authored a Terraform module to deploy an AWS Lambda function and S3 bucket for
-                    hosting an AI audio demo, configuring IAM roles with least-privilege access for secure execution.
+                <li>A Terraform setup (terraform/main.tf) to automatically create an AWS Lambda function and S3 bucket,
+                    making it super easy to deploy the demo on AWS’ free tier.</li>
+                <li>A Python script (index.py) that safely uses ElevenLabs’ API to generate a voice clip with the Adam
+                    voice, saying, “Hey ElevenLabs — I absolutely love your software…” and saves it to S3 as output.mp3.
                 </li>
-                <li>CI/CD Enhancement: Integrated GitHub Actions to automate deployment, adding steps for Terraform
-                    init, plan, and apply, plus S3 uploads and CloudFront invalidation for the demo frontend.</li>
-                <li>Pull Request: Submitted a PR to ElevenLabs' repository with clear documentation, linking to my
-                    portfolio (<a href="https://trisoncloudresume.com"
-                        class="text-blue-600 hover:underline">trisoncloudresume.com</a>) for hiring visibility.</li>
-                <li>Security Focus: Ensured IAM policies restricted Lambda and S3 access, and validated S3 bucket
-                    policies to prevent public misconfigurations.</li>
+                <li>Secure API key storage using AWS Secrets Manager, so no one’s keys are left in plain text.</li>
+                <li>An updated README with clear, beginner-friendly steps to deploy and test the demo.</li>
             </ul>
-            <p>Deployment: Forked the repository, tested locally with AWS CLI, and pushed changes via GitHub, ensuring
-                compatibility with ElevenLabs' Next.js-based stack.</p>
+            <p>I tested everything locally with AWS CLI to ensure the voice clip lands in
+                <code>s3://elevenlabs-demo-bucket-&lt;random-suffix&gt;/output.mp3</code>, ready to play!
+            </p>
         </section>
         <section class="mb-6">
             <h2 class="section-title">What I Learned</h2>
             <ul class="list-disc list-inside ml-4">
-                <li>Terraform for AI Workflows: Writing modular Terraform for Lambda and S3 deepened my Infrastructure
-                    as Code skills, especially for serverless AI applications.</li>
-                <li>CI/CD Optimization: Automating deployments with GitHub Actions taught me to streamline workflows,
-                    reducing setup time and ensuring repeatability.</li>
-                <li>Open-Source Contribution: Navigating ElevenLabs' repo and PR process honed my ability to align
-                    contributions with project standards and community expectations.</li>
-                <li>Security in AI: Applying least-privilege IAM and secure bucket policies reinforced the importance of
-                    security in AI-driven cloud deployments.</li>
+                <li>Simplifying Cloud Setups: Using Terraform to automate AWS deployments makes complex tech accessible,
+                    especially for free-tier users.</li>
+                <li>Secure Coding: Storing API keys in Secrets Manager (not hardcoding them!) is a must for real-world
+                    apps.</li>
+                <li>AI Integration: Working with ElevenLabs’ API showed me how cool it is to blend cloud skills with AI
+                    tech.</li>
+                <li>Open-Source Vibes: Contributing to a real project taught me how to write clear docs and make PRs
+                    that others can actually use.</li>
             </ul>
         </section>
         <section class="mb-6">
             <h2 class="section-title">Hiccups and Troubleshooting</h2>
-            <p>Some challenges arose during the project:
+            <p>It wasn’t all smooth sailing, but I tackled these bumps:</p>
             <ul class="list-disc list-inside ml-4">
-                <li>Terraform State Conflicts: Initial apply failed due to state mismatches in the forked repo. Resolved
-                    by initializing a new state file locally and validating with <code>terraform plan</code>.</li>
-                <li>IAM Permissions: Lambda execution role lacked S3 access, causing runtime errors. Fixed by updating
-                    the IAM policy with <code>s3:GetObject</code> and <code>s3:PutObject</code> permissions.</li>
-                <li>CI/CD Syntax Errors: GitHub Actions workflow had YAML indentation issues, similar to past deploy.yml
-                    problems. Corrected spacing and tested with a dry run.</li>
-                <li>Next.js Compatibility: Ensured the Terraform script aligned with the repo’s Next.js frontend by
-                    testing the demo locally with <code>npm run dev</code>.</li>
+                <li>Lambda Errors: The Lambda function failed with an “Unhandled” error because it couldn’t access the
+                    S3 bucket. I added the right permissions (<code>s3:PutObject</code>) to the Lambda role and
+                    retested.</li>
+                <li>Terraform Snags: My first Terraform apply didn’t work due to a mix-up with the setup files. I
+                    restarted with a clean setup and double-checked with <code>terraform plan</code>.</li>
+                <li>API Key Safety: I initially forgot to set up Secrets Manager properly, so I fixed it to keep the API
+                    key secure.</li>
+                <li>Testing Woes: The voice clip didn’t generate at first due to a typo in the Python script. A quick
+                    debug with AWS CloudWatch logs saved the day.</li>
             </ul>
-            </p>
-            <p>Double-checked AWS credentials in GitHub Secrets and IAM roles for <code>s3:PutObject</code> and
-                <code>lambda:InvokeFunction</code> to avoid deployment issues, leveraging lessons from my Cloud Resume
-                Challenge.
-            </p>
+            <p>These fixes leaned on my Cloud Resume Challenge experience, like checking AWS permissions and debugging
+                with CLI, which made troubleshooting feel familiar.</p>
         </section>
         <section class="mb-6">
             <h2 class="section-title">Why It's Cool for a Cloud Resume</h2>
-            <p>This project demonstrates my ability to contribute impactful, secure, and automated solutions to an
-                AI-focused open-source project. It highlights my Terraform and CI/CD expertise, aligns with ElevenLabs'
-                innovative AI voice tech, and positions me as a strong candidate for junior cloud security or DevOps
-                roles. The PR’s 30% setup time reduction mirrors my Cloud Resume efficiency gains, and linking my
-                portfolio ensures hiring managers see my broader skillset.</p>
+            <p>This project is my way of saying, “Hey ElevenLabs, I’m ready for IT!” It shows I can build something
+                practical with AWS and Terraform, make it secure, and save time—cutting setup by ~30%. It’s a perfect
+                fit for ElevenLabs’ AI voice mission and highlights my pivot from politics to cloud security and DevOps.
+                Check out my full portfolio at <a href="https://trisoncloudresume.com"
+                    class="text-blue-600 hover:underline">trisoncloudresume.com</a> to see more of my work. Fingers
+                crossed for a junior role, but even feedback or tips on IT firms hiring entry-level talent would be
+                awesome!</p>
         </section>
     </div>
     <script src="cloudresume.js"></script>
