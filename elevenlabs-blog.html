@@ -44,12 +44,12 @@
                 ElevenLabs’ AI voice API. The tool saves ~30% of setup time, letting developers and hobbyists focus on
                 creating with AI audio instead of wrestling AWS. Here’s what’s included:</p>
             <ul class="list-disc list-inside ml-4">
-                <li>A Terraform script (<code>main.tf</code>) that sets up an AWS Lambda, S3 bucket, and IAM roles, all
+                <li>A Terraform script (main.tf) that sets up an AWS Lambda, S3 bucket, and IAM roles, all
                     optimized for the Free Tier.</li>
-                <li>A Python script (<code>index.py</code>) that calls ElevenLabs’ API to generate a “Hey ElevenLabs”
-                    MP3 and saves it to S3, with dependencies like <code>requests</code> included.</li>
+                <li>A Python script (index.py) that calls ElevenLabs’ API to generate a “Hey ElevenLabs”
+                    MP3 and saves it to S3, with dependencies like requests included.</li>
                 <li>Dynamic bucket naming using environment variables to avoid hardcoding errors.</li>
-                <li>An updated <code>README.md</code> with clear, beginner-friendly steps: add your API key, run
+                <li>An updated README.md with clear, beginner-friendly steps: add your API key, run
                     Terraform, get your voice clip.</li>
             </ul>
             <p>This setup makes experimenting with ElevenLabs’ tech fast, accessible, and fun, with no cloud expertise
@@ -62,8 +62,9 @@
             <ul class="list-disc list-inside ml-4">
                 <li><strong>Terraform’s Value</strong>: It’s a great tool for automating AWS, though it can be
                     frustrating when configs need tweaking.</li>
-                <li><strong>Lambda Dependencies</strong>: Missing libraries like <code>requests</code> or
-                    <code>idna</code> causes crashes. Zipping them all up is critical.</li>
+                <li><strong>Lambda Dependencies</strong>: Missing libraries like requests or
+                    idna causes crashes. Zipping them all up is critical.
+                </li>
                 <li><strong>Dynamic Configs</strong>: Environment variables for bucket names saved tons of rework,
                     making the tool more reliable.</li>
                 <li><strong>Open-Source Impact</strong>: Clear docs and a clean PR ensure others can use this to explore
@@ -78,7 +79,7 @@
                     I fixed it by enforcing lowercase in Terraform.</li>
                 <li><strong>Lambda Errors</strong>: “Unhandled” errors, likely from an API key or voice ID issue, are
                     still under investigation. I’m testing the API locally to pinpoint the cause.</li>
-                <li><strong>Missing Dependencies</strong>: Lambda failed without <code>requests</code> and other
+                <li><strong>Missing Dependencies</strong>: Lambda failed without requests and other
                     libraries. I included them in the ZIP file.</li>
                 <li><strong>Log Access</strong>: CloudWatch threw a “ResourceNotFoundException,” possibly due to
                     permissions. I’m exploring workarounds like local testing.</li>
