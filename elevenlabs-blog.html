@@ -25,72 +25,77 @@
             </p>
         </header>
         <section class="mb-6">
-            <h2 class="section-title">Overview</h2>
-            <p>I’m a huge fan of ElevenLabs’ AI voice tech, so I jumped at the chance to contribute to their <a
+            <h2 class="section-title">Why I Jumped In</h2>
+            <p>ElevenLabs’ AI voice tech is incredible, so I dove into their <a
                     href="https://github.com/elevenlabs/elevenlabs-nextjs-starter"
-                    class="text-blue-600 hover:underline">open-source project</a>. My goal was to make it easier for
-                anyone to test their AI voice demo on AWS without spending a dime, using skills from my Cloud Resume
-                Challenge. I added a setup that deploys a demo in minutes, complete with a custom “Hey ElevenLabs, I
-                love your software!” voice clip. This project cut setup time by about 30% and shows my pivot from
-                politics to IT, aiming for roles in cloud security, DevOps, or AI ops.</p>
+                    class="text-blue-600 hover:underline">open-source repo</a> to make it easier for developers and
+                hobbyists to test it. My goal? Build a tool that cuts demo setup time by ~30%, letting anyone explore
+                their text-to-speech API on AWS Free Tier without battling complex configs. This project showcases my
+                AWS and Terraform skills for junior cloud security or DevOps roles, while aligning with ElevenLabs’
+                mission to advance AI audio. It’s also a step in my journey from politics to IT—check out my portfolio
+                at <a href="https://trisoncloudresume.com"
+                    class="text-blue-600 hover:underline">trisoncloudresume.com</a> for more.</p>
         </section>
         <section class="mb-6">
             <h2 class="section-title">What I Built</h2>
-            <p>I contributed a pull request to the <a
+            <p>I submitted a pull request to the <a
                     href="https://github.com/elevenlabs/elevenlabs-nextjs-starter/pull/4"
-                    class="text-blue-600 hover:underline">elevenlabs-nextjs-starter</a> repo with:</p>
+                    class="text-blue-600 hover:underline">elevenlabs-nextjs-starter</a> repo to simplify testing
+                ElevenLabs’ AI voice API. The tool saves ~30% of setup time, letting developers and hobbyists focus on
+                creating with AI audio instead of wrestling AWS. Here’s what’s included:</p>
             <ul class="list-disc list-inside ml-4">
-                <li>A Terraform setup (terraform/main.tf) to automatically create an AWS Lambda function and S3 bucket,
-                    making it super easy to deploy the demo on AWS’ free tier.</li>
-                <li>A Python script (index.py) that safely uses ElevenLabs’ API to generate a voice clip with the Adam
-                    voice, saying, “Hey ElevenLabs — I absolutely love your software…” and saves it to S3 as output.mp3.
-                </li>
-                <li>Secure API key storage using AWS Secrets Manager, so no one’s keys are left in plain text.</li>
-                <li>An updated README with clear, beginner-friendly steps to deploy and test the demo.</li>
+                <li>A Terraform script (<code>main.tf</code>) that sets up an AWS Lambda, S3 bucket, and IAM roles, all
+                    optimized for the Free Tier.</li>
+                <li>A Python script (<code>index.py</code>) that calls ElevenLabs’ API to generate a “Hey ElevenLabs”
+                    MP3 and saves it to S3, with dependencies like <code>requests</code> included.</li>
+                <li>Dynamic bucket naming using environment variables to avoid hardcoding errors.</li>
+                <li>An updated <code>README.md</code> with clear, beginner-friendly steps: add your API key, run
+                    Terraform, get your voice clip.</li>
             </ul>
-            <p>I tested everything locally with AWS CLI to ensure the voice clip lands in
-                s3://elevenlabs-demo-bucket-&lt;random-suffix&gt;/output.mp3, ready to play!
-            </p>
+            <p>This setup makes experimenting with ElevenLabs’ tech fast, accessible, and fun, with no cloud expertise
+                required.</p>
         </section>
         <section class="mb-6">
             <h2 class="section-title">What I Learned</h2>
+            <p>This project deepened my understanding of cloud and open-source work, while highlighting why tools like
+                this matter:</p>
             <ul class="list-disc list-inside ml-4">
-                <li>Simplifying Cloud Setups: Using Terraform to automate AWS deployments makes complex tech accessible,
-                    especially for free-tier users.</li>
-                <li>Secure Coding: Storing API keys in Secrets Manager (not hardcoding them!) is a must for real-world
-                    apps.</li>
-                <li>AI Integration: Working with ElevenLabs’ API showed me how cool it is to blend cloud skills with AI
-                    tech.</li>
-                <li>Open-Source Vibes: Contributing to a real project taught me how to write clear docs and make PRs
-                    that others can actually use.</li>
+                <li><strong>Terraform’s Value</strong>: It’s a great tool for automating AWS, though it can be
+                    frustrating when configs need tweaking.</li>
+                <li><strong>Lambda Dependencies</strong>: Missing libraries like <code>requests</code> or
+                    <code>idna</code> causes crashes. Zipping them all up is critical.</li>
+                <li><strong>Dynamic Configs</strong>: Environment variables for bucket names saved tons of rework,
+                    making the tool more reliable.</li>
+                <li><strong>Open-Source Impact</strong>: Clear docs and a clean PR ensure others can use this to explore
+                    AI audio easily.</li>
             </ul>
         </section>
         <section class="mb-6">
-            <h2 class="section-title">Hiccups and Troubleshooting</h2>
-            <p>It wasn’t all smooth sailing, but I tackled these bumps:</p>
+            <h2 class="section-title">Challenges and Solutions</h2>
+            <p>Building this had its challenges, but I tackled them to keep the tool user-friendly:</p>
             <ul class="list-disc list-inside ml-4">
-                <li>Lambda Errors: The Lambda function failed with an “Unhandled” error because it couldn’t access the
-                    S3 bucket. I added the right permissions (s3:PutObject) to the Lambda role and
-                    retested.</li>
-                <li>Terraform Snags: My first Terraform apply didn’t work due to a mix-up with the setup files. I
-                    restarted with a clean setup and double-checked with terraform plan.</li>
-                <li>API Key Safety: I initially forgot to set up Secrets Manager properly, so I fixed it to keep the API
-                    key secure.</li>
-                <li>Testing Woes: The voice clip didn’t generate at first due to a typo in the Python script. A quick
-                    debug with AWS CloudWatch logs saved the day.</li>
+                <li><strong>Bucket Name Issues</strong>: Random bucket names used uppercase letters, which AWS rejected.
+                    I fixed it by enforcing lowercase in Terraform.</li>
+                <li><strong>Lambda Errors</strong>: “Unhandled” errors, likely from an API key or voice ID issue, are
+                    still under investigation. I’m testing the API locally to pinpoint the cause.</li>
+                <li><strong>Missing Dependencies</strong>: Lambda failed without <code>requests</code> and other
+                    libraries. I included them in the ZIP file.</li>
+                <li><strong>Log Access</strong>: CloudWatch threw a “ResourceNotFoundException,” possibly due to
+                    permissions. I’m exploring workarounds like local testing.</li>
             </ul>
-            <p>These fixes leaned on my Cloud Resume Challenge experience, like checking AWS permissions and debugging
-                with CLI, which made troubleshooting feel familiar.</p>
+            <p>Using AWS CLI and lessons from my Cloud Resume Challenge helped me resolve most issues, ensuring the tool
+                streamlines AI voice testing.</p>
         </section>
         <section class="mb-6">
-            <h2 class="section-title">Why It's Cool for a Cloud Resume</h2>
-            <p>This project is my way of saying, “Hey ElevenLabs, I’m ready for IT!” It shows I can build something
-                practical with AWS and Terraform, make it secure, and save time—cutting setup by ~30%. It’s a perfect
-                fit for ElevenLabs’ AI voice mission and highlights my pivot from politics to cloud security and DevOps.
-                Check out my full portfolio at <a href="https://trisoncloudresume.com"
-                    class="text-blue-600 hover:underline">trisoncloudresume.com</a> to see more of my work. Fingers
-                crossed for a junior role, but even feedback or tips on IT firms hiring entry-level talent would be
-                awesome!</p>
+            <h2 class="section-title">Why It’s a Win</h2>
+            <p>This project showcases my ability to build efficient, secure cloud solutions with AWS and Terraform. It
+                cuts demo setup time by ~30%, letting developers focus on creating with ElevenLabs’ AI voice tech
+                instead of battling AWS configs. For hobbyists, it’s a plug-and-play way to explore the API’s potential
+                with zero cloud expertise. By aligning with ElevenLabs’ mission to advance AI audio, this contribution
+                highlights my technical skills and problem-solving mindset, honed through my transition from politics to
+                IT. See more at <a href="https://trisoncloudresume.com"
+                    class="text-blue-600 hover:underline">trisoncloudresume.com</a>. I’m excited to contribute to
+                innovative teams and welcome feedback to grow in cloud security or DevOps!</p>
         </section>
     </div>
     <script src="cloudresume.js"></script>
