@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trison's Projects</title>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="cloudresume.css">
+</head>
+
+<body>
+    <div class="matrix-rain" id="matrix-rain" style="top: 2rem;"></div>
+    <div class="resume-container bg-gray-100 p-8">
+        <header class="text-center mb-8">
+            <h1>Trison's Projects</h1>
+            <p class="header-contact">
+                <a href="/cloudresume.html" class="text-blue-600 hover:underline">Back to Resume</a>
+                <span>|</span>
+                <a href="/blog.html" class="text-blue-600 hover:underline">Blog</a>
+                <span>|</span>
+                <a href="https://www.linkedin.com/in/trison-braithwaite-80a243141/"
+                    class="text-blue-600 hover:underline">LinkedIn</a>
+                <span>|</span>
+                <a href="https://github.com/Trisonb/cloud-resume-challenge"
+                    class="text-blue-600 hover:underline">GitHub</a>
+            </p>
+        </header>
+        <section class="mb-6">
+            <h2 class="section-title">All Projects</h2>
+            <div>
+                <p class="job-title"><a href="/cafe-sales-blog.html" class="text-blue-600 hover:underline">Cafe Sales
+                        Data Cleaning and Analysis</a></p>
+                <p class="dates">October 2025</p>
+                <ul class="list-disc list-inside ml-4">
+                    <li>Cleaned a 10,000-row Kaggle dataset of cafe sales using Python (pandas) and SQL, addressing
+                        missing values, duplicates, and format inconsistencies. Loaded data into AWS RDS (PostgreSQL)
+                        and ran advanced queries to analyze sales trends. Visualized results in an HTML page. <a
+                            href="/cafe-sales-blog.html" class="text-blue-600 hover:underline">Read more in my blog
+                            post</a>. <a href="/cafe_sales_analysis.html" class="text-blue-600 hover:underline">View
+                            results</a>.</li>
+                </ul>
+            </div>
+            <div>
+                <p class="job-title"><a href="/elevenlabs-blog.html" class="text-blue-600 hover:underline">ElevenLabs AI
+                        Audio Demo Deployment</a></p>
+                <p class="dates">September 2025</p>
+                <ul class="list-disc list-inside ml-4">
+                    <li>Contributed a Terraform script and Python Lambda handler to ElevenLabs' open-source <a
+                            href="https://github.com/elevenlabs/elevenlabs-nextjs-starter"
+                            class="text-blue-600 hover:underline">elevenlabs-nextjs-starter</a> repository, automating
+                        AWS Free Tier setup for their AI voice text-to-speech demo—generating MP3 clips and storing them
+                        in S3. Reduced deployment time by about 30% with dynamic configs and beginner-friendly docs. <a
+                            href="/elevenlabs-blog.html" class="text-blue-600 hover:underline">Read more in my blog
+                            post</a>.</li>
+                    <li>Implemented secure IAM roles with least-privilege policies, resolved Lambda dependency issues
+                        (e.g., bundling requests library), and enforced lowercase bucket naming for AWS
+                        compliance—demonstrating cloud security, DevOps automation, and problem-solving skills for
+                        junior roles in AI ops or infrastructure.</li>
+                </ul>
+            </div>
+            <div>
+                <p class="job-title"><a href="/vpc-blog.html" class="text-blue-600 hover:underline">Secure AWS VPC</a>
+                </p>
+                <p class="dates">September 2025</p>
+                <ul class="list-disc list-inside ml-4">
+                    <li>Designed and deployed a secure AWS VPC with public and private subnets using Terraform, enabling
+                        private EC2 instances to access the internet via a NAT instance. Configured security groups and
+                        NACLs for least-privilege access, integrated AWS Security Hub for monitoring, and documented the
+                        process in a <a href="/vpc-blog.html" class="text-blue-600 hover:underline">technical blog
+                            post</a>.</li>
+                    <li>Troubleshot NAT connectivity issues by verifying source/destination checks, route tables,
+                        iptables, and IAM permissions, using AWS CLI and VPC Flow Logs attempts to identify and resolve
+                        network blocks, showcasing cloud security troubleshooting skills.</li>
+                </ul>
+            </div>
+            <div>
+                <p class="job-title"><a href="/cloud-resume-blog.html" class="text-blue-600 hover:underline">Cloud
+                        Resume Challenge</a></p>
+                <p class="dates">June 2025</p>
+                <ul class="list-disc list-inside ml-4">
+                    <li>Designed and deployed a secure serverless website using AWS services, Terraform, and GitHub
+                        Actions. Implemented DNSSEC, WAF, least-privilege IAM, and CI/CD pipeline hardening, showcasing
+                        cloud security engineering skills. Documented the process in a <a href="/cloud-resume-blog.html"
+                            class="text-blue-600 hover:underline">technical blog post</a>.</li>
+                    <li>Developed a real-time visitor counter using AWS Lambda for backend logic, DynamoDB for storing
+                        visit counts, and API Gateway with CORS enabled for secure cross-origin JavaScript requests,
+                        enabling dynamic updates to the webpage.</li>
+                </ul>
+            </div>
+            <div>
+                <p class="job-title"><a href="/sql-game.html" class="text-blue-600 hover:underline">SQL Injection
+                        Game</a></p>
+                <p class="dates">2025</p>
+                <ul class="list-disc list-inside ml-4">
+                    <li>Built an interactive frontend-only game to simulate SQL injection attempts, using HTML, CSS, and
+                        JavaScript. Users input SQL commands, and a bot detects attacks with regex, responds with snarky
+                        roasts, and logs attempts to the console. <a href="/sql-game.html"
+                            class="text-blue-600 hover:underline">Click here to play the game</a>.</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+    <script src="cloudresume.js"></script>
+</body>
+
+</html>

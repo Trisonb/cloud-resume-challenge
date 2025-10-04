@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cafe Sales Analysis</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+
+    th,
+    td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Cafe Sales Analysis</h1>
+  <h2>Total Sales by Item (Excluding Invalid Dates)</h2>
+  <table border="1" class="dataframe">
+    <thead>
+      <tr style="text-align: right;">
+        <th>Item</th>
+        <th>total_sales</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Salad</td>
+        <td>14890.00</td>
+      </tr>
+      <tr>
+        <td>Sandwich</td>
+        <td>11680.00</td>
+      </tr>
+      <tr>
+        <td>Smoothie</td>
+        <td>11608.00</td>
+      </tr>
+      <tr>
+        <td>Juice</td>
+        <td>9108.00</td>
+      </tr>
+      <tr>
+        <td>Cake</td>
+        <td>9009.00</td>
+      </tr>
+      <tr>
+        <td>Unknown</td>
+        <td>7231.50</td>
+      </tr>
+      <tr>
+        <td>Coffee</td>
+        <td>6210.00</td>
+      </tr>
+      <tr>
+        <td>Tea</td>
+        <td>4179.00</td>
+      </tr>
+      <tr>
+        <td>Cookie</td>
+        <td>2775.00</td>
+      </tr>
+    </tbody>
+  </table>
+  <h2>Average Spend by Payment Method</h2>
+  <table border="1" class="dataframe">
+    <thead>
+      <tr style="text-align: right;">
+        <th>Payment Method</th>
+        <th>avg_spend</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Cash</td>
+        <td>9.06</td>
+      </tr>
+      <tr>
+        <td>Credit Card</td>
+        <td>8.98</td>
+      </tr>
+      <tr>
+        <td>Digital Wallet</td>
+        <td>8.94</td>
+      </tr>
+      <tr>
+        <td>Unknown</td>
+        <td>8.76</td>
+      </tr>
+    </tbody>
+  </table>
+  <h2>Monthly Sales Trend</h2>
+  <table border="1" class="dataframe">
+    <thead>
+      <tr style="text-align: right;">
+        <th>month</th>
+        <th>total_sales</th>
+        <th>transaction_count</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>2023-01</td>
+        <td>6452.50</td>
+        <td>729</td>
+      </tr>
+      <tr>
+        <td>2023-02</td>
+        <td>6055.00</td>
+        <td>660</td>
+      </tr>
+      <tr>
+        <td>2023-03</td>
+        <td>6482.00</td>
+        <td>749</td>
+      </tr>
+      <tr>
+        <td>2023-04</td>
+        <td>6485.50</td>
+        <td>699</td>
+      </tr>
+      <tr>
+        <td>2023-05</td>
+        <td>6191.00</td>
+        <td>694</td>
+      </tr>
+      <tr>
+        <td>2023-06</td>
+        <td>6678.00</td>
+        <td>739</td>
+      </tr>
+      <tr>
+        <td>2023-07</td>
+        <td>6366.50</td>
+        <td>718</td>
+      </tr>
+      <tr>
+        <td>2023-08</td>
+        <td>6453.00</td>
+        <td>732</td>
+      </tr>
+      <tr>
+        <td>2023-09</td>
+        <td>6209.50</td>
+        <td>711</td>
+      </tr>
+      <tr>
+        <td>2023-10</td>
+        <td>6512.00</td>
+        <td>741</td>
+      </tr>
+      <tr>
+        <td>2023-11</td>
+        <td>6418.00</td>
+        <td>718</td>
+      </tr>
+      <tr>
+        <td>2023-12</td>
+        <td>6387.50</td>
+        <td>706</td>
+      </tr>
+    </tbody>
+  </table>
+  <h2>Top 3 Items by Location</h2>
+  <table border="1" class="dataframe">
+    <thead>
+      <tr style="text-align: right;">
+        <th>Location</th>
+        <th>Item</th>
+        <th>total_sales</th>
+        <th>sales_rank</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>In-Store</td>
+        <td>Salad</td>
+        <td>4795.00</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>In-Store</td>
+        <td>Sandwich</td>
+        <td>3884.00</td>
+        <td>2</td>
+      </tr>
+      <tr>
+        <td>In-Store</td>
+        <td>Smoothie</td>
+        <td>3344.00</td>
+        <td>3</td>
+      </tr>
+      <tr>
+        <td>Takeaway</td>
+        <td>Salad</td>
+        <td>4590.00</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>Takeaway</td>
+        <td>Sandwich</td>
+        <td>3440.00</td>
+        <td>2</td>
+      </tr>
+      <tr>
+        <td>Takeaway</td>
+        <td>Smoothie</td>
+        <td>3216.00</td>
+        <td>3</td>
+      </tr>
+    </tbody>
+  </table>
+  <h2>Percentage of Sales by Item per Location</h2>
+  <table border="1" class="dataframe">
+    <thead>
+      <tr style="text-align: right;">
+        <th>Location</th>
+        <th>Item</th>
+        <th>item_sales</th>
+        <th>sales_percentage</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>In-Store</td>
+        <td>Salad</td>
+        <td>4795.00</td>
+        <td>20.47</td>
+      </tr>
+      <tr>
+        <td>In-Store</td>
+        <td>Sandwich</td>
+        <td>3884.00</td>
+        <td>16.58</td>
+      </tr>
+      <tr>
+        <td>In-Store</td>
+        <td>Smoothie</td>
+        <td>3344.00</td>
+        <td>14.27</td>
+      </tr>
+      <tr>
+        <td>In-Store</td>
+        <td>Juice</td>
+        <td>2970.00</td>
+        <td>12.68</td>
+      </tr>
+      <tr>
+        <td>In-Store</td>
+        <td>Cake</td>
+        <td>2559.00</td>
+        <td>10.92</td>
+      </tr>
+      <tr>
+        <td>In-Store</td>
+        <td>Unknown</td>
+        <td>2110.50</td>
+        <td>9.01</td>
+      </tr>
+      <tr>
+        <td>In-Store</td>
+        <td>Coffee</td>
+        <td>1670.00</td>
+        <td>7.13</td>
+      </tr>
+      <tr>
+        <td>In-Store</td>
+        <td>Tea</td>
+        <td>1266.00</td>
+        <td>5.40</td>
+      </tr>
+      <tr>
+        <td>In-Store</td>
+        <td>Cookie</td>
+        <td>830.00</td>
+        <td>3.54</td>
+      </tr>
+      <tr>
+        <td>Takeaway</td>
+        <td>Salad</td>
+        <td>4590.00</td>
+        <td>20.14</td>
+      </tr>
+      <tr>
+        <td>Takeaway</td>
+        <td>Sandwich</td>
+        <td>3440.00</td>
+        <td>15.10</td>
+      </tr>
+      <tr>
+        <td>Takeaway</td>
+        <td>Smoothie</td>
+        <td>3216.00</td>
+        <td>14.11</td>
+      </tr>
+      <tr>
+        <td>Takeaway</td>
+        <td>Cake</td>
+        <td>2661.00</td>
+        <td>11.68</td>
+      </tr>
+      <tr>
+        <td>Takeaway</td>
+        <td>Juice</td>
+        <td>2484.00</td>
+        <td>10.90</td>
+      </tr>
+      <tr>
+        <td>Takeaway</td>
+        <td>Unknown</td>
+        <td>2279.00</td>
+        <td>10.00</td>
+      </tr>
+      <tr>
+        <td>Takeaway</td>
+        <td>Coffee</td>
+        <td>1878.00</td>
+        <td>8.24</td>
+      </tr>
+      <tr>
+        <td>Takeaway</td>
+        <td>Tea</td>
+        <td>1290.00</td>
+        <td>5.66</td>
+      </tr>
+      <tr>
+        <td>Takeaway</td>
+        <td>Cookie</td>
+        <td>949.00</td>
+        <td>4.16</td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+
+</html>

@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cafe Sales Data Cleaning and Analysis - Trison's Cloud Blog</title>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="cloudresume.css">
+</head>
+
+<body>
+    <div class="matrix-rain" id="matrix-rain" style="top: 2rem;"></div>
+    <div class="resume-container bg-gray-100 p-8">
+        <header class="text-center mb-8">
+            <h1>Cafe Sales Data Cleaning and Analysis</h1>
+            <p class="dates">October 2025</p>
+            <p class="header-contact">
+                <a href="/cloudresume.html" class="text-blue-600 hover:underline">Back to Resume</a>
+                <span>|</span>
+                <a href="/blog.html" class="text-blue-600 hover:underline">Back to Blog</a>
+                <span>|</span>
+                <a href="https://github.com/Trisonb/cloud-resume-challenge"
+                    class="text-blue-600 hover:underline">GitHub</a>
+                <span>|</span>
+                <a href="/cafe_sales_analysis.html" class="text-blue-600 hover:underline">View Results</a>
+            </p>
+        </header>
+        <section class="mb-6">
+            <h2 class="section-title">Why I Took On This Project</h2>
+            <p>Data cleaning and analysis are critical skills for cloud and data engineering roles. I chose a messy
+                10,000-row cafe sales dataset from Kaggle to practice cleaning, querying, and cloud deployment using
+                Python, SQL, and AWS RDS. This project showcases my ability to handle real-world data challenges and
+                deploy solutions in the cloud, aligning with my transition to IT and cloud security. See more at <a
+                    href="https://trisoncloudresume.com"
+                    class="text-blue-600 hover:underline">trisoncloudresume.com</a>.</p>
+        </section>
+        <section class="mb-6">
+            <h2 class="section-title">What I Built</h2>
+            <p>I cleaned a Kaggle dataset (<a
+                    href="https://www.kaggle.com/datasets/ahmedmohamed2003/cafe-sales-dirty-data-for-cleaning-training"
+                    class="text-blue-600 hover:underline">Cafe Sales - Dirty Data</a>) with 10,000 rows, addressing
+                missing values, duplicates, and format issues. The cleaned data (8,733 rows) was loaded into SQLite and
+                AWS RDS (PostgreSQL) for analysis. Advanced SQL queries analyzed sales trends, visualized in an HTML
+                page. Key components:</p>
+            <ul class="list-disc list-inside ml-4">
+                <li>Python script using pandas, numpy, SQLAlchemy, and psycopg2 to clean data and load into databases.
+                </li>
+                <li>SQLite and PostgreSQL databases for local and cloud analysis.</li>
+                <li>Five advanced SQL queries: total sales by item, average spend by payment method, monthly sales
+                    trends, top items by location, and sales percentage by item per location.</li>
+                <li>HTML page (<a href="/cafe_sales_analysis.html"
+                        class="text-blue-600 hover:underline">cafe_sales_analysis.html</a>) with formatted query
+                    results.</li>
+            </ul>
+        </section>
+        <section class="mb-6">
+            <h2 class="section-title">What I Learned</h2>
+            <p>This project deepened my understanding of data engineering and cloud database management:</p>
+            <ul class="list-disc list-inside ml-4">
+                <li><strong>Data Cleaning</strong>: Systematic handling of missing values (e.g., 32.65% in Location),
+                    invalid data ("ERROR"/"UNKNOWN"), and type conversions is critical for reliable analysis.</li>
+                <li><strong>SQL Differences</strong>: PostgreSQL’s strict case-sensitivity and GROUP BY rules differ
+                    from SQLite, requiring precise query syntax.</li>
+                <li><strong>AWS RDS</strong>: Setting up and securing RDS instances involves IAM permissions, VPC
+                    configuration, and connectivity troubleshooting.</li>
+                <li><strong>Chromebook Workflow</strong>: Linux terminal file access on Chromebook requires workarounds
+                    like dragging files via Files app.</li>
+            </ul>
+        </section>
+        <section class="mb-6">
+            <h2 class="section-title">Challenges and Solutions</h2>
+            <p>The dataset and cloud setup presented several challenges:</p>
+            <ul class="list-disc list-inside ml-4">
+                <li><strong>Chromebook File System</strong>: Inaccessible Downloads path in Linux terminal. Fixed by
+                    dragging CSV via Files app.</li>
+                <li><strong>Missing Values</strong>: High missing percentages (25.79% Payment Method, 32.65% Location).
+                    Filled with "Unknown" to preserve data.</li>
+                <li><strong>Invalid Data</strong>: "ERROR"/"UNKNOWN" in numeric columns. Replaced with NaN, imputed
+                    Total Spent, dropped ~10% of rows with missing Quantity/Price Per Unit.</li>
+                <li><strong>Data Types</strong>: Numeric columns as `object`. Converted to `float64` after cleaning.
+                </li>
+                <li><strong>SQLAlchemy Errors</strong>: Multi-statement SQL failed in SQLite. Used `text()` and separate
+                    `execute()` calls.</li>
+                <li><strong>SQLite Limitation</strong>: `RANK()` in `HAVING` failed. Used CTE for ranking.</li>
+                <li><strong>PostgreSQL Issues</strong>: Case-sensitive column names and `GROUP BY` errors. Fixed with
+                    quoted names and adjusted `GROUP BY`.</li>
+                <li><strong>RDS Access</strong>: `--no-publicly-accessible` blocked connections. Made instance publicly
+                    accessible, configured security group for my IP.</li>
+            </ul>
+        </section>
+        <section class="mb-6">
+            <h2 class="section-title">Why It’s a Win</h2>
+            <p>This project demonstrates my ability to clean and analyze large datasets, deploy cloud databases, and
+                visualize results. Starting with a 10,000-row messy dataset, I reduced it to 8,733 clean rows, ran
+                advanced SQL queries in SQLite and AWS RDS, and created a polished HTML visualization. The process honed
+                my Python, SQL, and AWS skills, aligning with junior cloud or data engineering roles. Check out the
+                results at <a href="/cafe_sales_analysis.html"
+                    class="text-blue-600 hover:underline">cafe_sales_analysis.html</a> and my portfolio at <a
+                    href="https://trisoncloudresume.com"
+                    class="text-blue-600 hover:underline">trisoncloudresume.com</a>.</p>
+        </section>
+    </div>
+    <script src="cloudresume.js"></script>
+</body>
+
+</html>

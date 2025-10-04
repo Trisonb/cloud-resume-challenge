@@ -15,6 +15,9 @@ on:
       - 'sql-game.js'
       - 'sql-game-blog.html'
       - 'elevenlabs-blog.html'
+      - 'cafe-sales-blog.html'
+      - 'projects.html'
+      - 'cafe_sales_analysis.html'
       - 'function.zip'
       - '.github/workflows/deploy.yml'
 permissions:
@@ -70,6 +73,9 @@ jobs:
         aws s3 cp sql-game.js s3://trison-cloud-resume-prod-mjcsikwf/sql-game.js --profile prod-account
         aws s3 cp sql-game-blog.html s3://trison-cloud-resume-prod-mjcsikwf/sql-game-blog.html --profile prod-account
         aws s3 cp elevenlabs-blog.html s3://trison-cloud-resume-prod-mjcsikwf/elevenlabs-blog.html --profile prod-account
+        aws s3 cp cafe-sales-blog.html s3://trison-cloud-resume-prod-mjcsikwf/cafe-sales-blog.html --profile prod-account
+        aws s3 cp projects.html s3://trison-cloud-resume-prod-mjcsikwf/projects.html --profile prod-account
+        aws s3 cp cafe_sales_analysis.html s3://trison-cloud-resume-prod-mjcsikwf/cafe_sales_analysis.html --profile prod-account
     - name: Create CloudFront Invalidation
       run: |
-        aws cloudfront create-invalidation --distribution-id E3V232V07RULP0 --paths "/cloudresume.html" "/blog.html" "/cloud-resume-blog.html" "/vpc-blog.html" "/sql-game.html" "/sql-game.js" "/sql-game-blog.html" "/elevenlabs-blog.html" --profile prod-account
+        aws cloudfront create-invalidation --distribution-id E3V232V07RULP0 --paths "/cloudresume.html" "/blog.html" "/cloud-resume-blog.html" "/vpc-blog.html" "/sql-game.html" "/sql-game.js" "/sql-game-blog.html" "/elevenlabs-blog.html" "/cafe-sales-blog.html" "/projects.html" "/cafe_sales_analysis.html" --profile prod-account
